@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Check, Timer as TimerIcon } from 'lucide-react'
 import { useRecetario } from '../data/store'
 import { usePersonal } from '../data/personal'
@@ -56,6 +56,8 @@ export function ModoCocinar() {
   const { id } = useParams()
   const { recetario } = useRecetario()
   const { markCooked } = usePersonal()
+  const navigate = useNavigate()
+  const cameFromDetail = !!(useLocation().state as { back?: boolean } | null)?.back
   const recipe = recetario.recipes.find((r) => r.id === id)
   const [i, setI] = useState(0)
   const [done, setDone] = useState(false)
@@ -78,9 +80,13 @@ export function ModoCocinar() {
   return (
     <div className="cook">
       <header className="cook__head">
-        <Link className="link" to={`/receta/${recipe.id}`}>
+        <button
+          className="link"
+          // salir deshace la entrada del modo cocinar, así "Volver" en la receta no regresa aquí
+          onClick={() => (cameFromDetail ? navigate(-1) : navigate(`/receta/${recipe.id}`, { replace: true }))}
+        >
           <ArrowLeft size={16} aria-hidden="true" /> Salir
-        </Link>
+        </button>
         <span className="cook__name">{recipe.name}</span>
         <span className="num">
           {i + 1}/{recipe.steps.length}

@@ -14,7 +14,7 @@ export function RecipeCard({ result, onAddMissing }: { result: MatchResult; onAd
 
   return (
     <article className={`card card--${status}`} style={{ viewTransitionName: `r-${recipe.id}` }}>
-      <Link to={`/receta/${recipe.id}`} className="card__link">
+      <Link to={`/receta/${recipe.id}`} state={{ back: true }} className="card__link">
         <div className="card__img">
           <RecipeImage recipe={recipe} />
           {status === 'ready' && <span className="state state--ready">Lista</span>}

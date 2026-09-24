@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { ChevronUp } from 'lucide-react'
 import { IngredientPanel } from '../components/IngredientPanel'
 import { RecipeCard } from '../components/RecipeCard'
 import { useRecetario } from '../data/store'
@@ -120,6 +121,9 @@ export function Cocina() {
           <div className="intro">
             <h1>Selecciona lo que tienes.</h1>
             <p>Las recetas se ordenan al instante según lo que haya en tu nevera.</p>
+            <button className="btn btn--primary only-mobile intro__cta" onClick={() => setSheetOpen(true)}>
+              Elegir ingredientes
+            </button>
           </div>
         )}
 
@@ -153,12 +157,19 @@ export function Cocina() {
         )}
       </section>
 
-      <button className="sheet-toggle" onClick={() => setSheetOpen(true)}>
-        <span>
-          Tu nevera <b className="num">{fridge.length}</b>
+      <button className="sheet-toggle" onClick={() => setSheetOpen(true)} aria-label="Abrir la nevera para elegir ingredientes">
+        <span className="sheet-toggle__main">
+          <ChevronUp size={20} aria-hidden="true" />
+          {fridge.length === 0 ? (
+            'Elegir ingredientes'
+          ) : (
+            <>
+              Tu nevera <b className="num">{fridge.length}</b>
+            </>
+          )}
         </span>
         <span className="num">
-          {groups.ready.length} listas · {groups.almost.length} cerca
+          {groups.ready.length} {groups.ready.length === 1 ? "lista" : "listas"} · {groups.almost.length} cerca
         </span>
       </button>
       {toast.node}

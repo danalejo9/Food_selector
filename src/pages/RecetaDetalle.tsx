@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Check, CircleAlert, Heart, Minus, Plus } from 'lucide-react'
 import { RecipeImage } from '../components/RecipeArt'
 import { FoodIcon } from '../components/FoodIcon'
@@ -15,6 +15,8 @@ const DIFFICULTY = ['', 'Fácil', 'Media', 'Exigente']
 export function RecetaDetalle() {
   const { id } = useParams()
   const navigate = useNavigate()
+  // si llegamos desde una tarjeta, volver es un paso atrás; si no (enlace directo, editor), a la cocina
+  const cameFromList = !!(useLocation().state as { back?: boolean } | null)?.back
   const { recetario, ingredientsById } = useRecetario()
   const p = usePersonal()
   const toast = useToast()
@@ -51,7 +53,7 @@ export function RecetaDetalle() {
 
   return (
     <article className="detail">
-      <button className="back link" onClick={() => (window.history.length > 1 ? navigate(-1) : navigate('/'))}>
+      <button className="back link" onClick={() => (cameFromList ? navigate(-1) : navigate('/'))}>
         <ArrowLeft size={16} aria-hidden="true" /> Volver
       </button>
 
@@ -84,7 +86,7 @@ export function RecetaDetalle() {
           </dl>
 
           <div className="detail__actions">
-            <Link className="btn btn--primary" to={`/receta/${recipe.id}/cocinar`}>
+            <Link className="btn btn--primary" to={`/receta/${recipe.id}/cocinar`} state={{ back: true }}>
               Cocinar paso a paso
             </Link>
             <button className={`btn${fav ? ' is-on' : ''}`} aria-pressed={fav} onClick={() => p.toggleFavorite(recipe.id)}>
