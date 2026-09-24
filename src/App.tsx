@@ -9,6 +9,7 @@ import { ListaCompras } from './pages/ListaCompras'
 import { Recetario } from './pages/Recetario'
 import { RecetaEditor } from './pages/RecetaEditor'
 import { DraftBar } from './components/DraftBar'
+import { Footer } from './components/Footer'
 import { EditorProvider, useEditor } from './data/editor'
 import { AccesoEditor } from './pages/AccesoEditor'
 
@@ -84,6 +85,7 @@ function Shell() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <Footer />
     </div>
   )
 }
