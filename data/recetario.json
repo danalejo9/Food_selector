@@ -1,0 +1,1516 @@
+{
+  "version": 1,
+  "ingredients": [
+    {
+      "id": "huevo",
+      "name": "Huevos",
+      "category": "lacteos",
+      "icon": "egg",
+      "pantryStaple": false
+    },
+    {
+      "id": "leche",
+      "name": "Leche",
+      "category": "lacteos",
+      "icon": "milk",
+      "pantryStaple": false
+    },
+    {
+      "id": "leche-deslactosada",
+      "name": "Leche deslactosada",
+      "category": "lacteos",
+      "icon": "milk",
+      "pantryStaple": false,
+      "family": "leche"
+    },
+    {
+      "id": "queso",
+      "name": "Queso",
+      "category": "lacteos",
+      "icon": "cheese",
+      "pantryStaple": false
+    },
+    {
+      "id": "queso-campesino",
+      "name": "Queso campesino",
+      "category": "lacteos",
+      "icon": "cheese",
+      "pantryStaple": false,
+      "family": "queso"
+    },
+    {
+      "id": "queso-mozzarella",
+      "name": "Queso mozzarella",
+      "category": "lacteos",
+      "icon": "cheese",
+      "pantryStaple": false,
+      "family": "queso"
+    },
+    {
+      "id": "queso-parmesano",
+      "name": "Queso parmesano",
+      "category": "lacteos",
+      "icon": "cheese",
+      "pantryStaple": false,
+      "family": "queso"
+    },
+    {
+      "id": "mantequilla",
+      "name": "Mantequilla",
+      "category": "lacteos",
+      "icon": "butter",
+      "pantryStaple": false
+    },
+    {
+      "id": "crema-leche",
+      "name": "Crema de leche",
+      "category": "lacteos",
+      "icon": "cream",
+      "pantryStaple": false
+    },
+    {
+      "id": "yogur",
+      "name": "Yogur",
+      "category": "lacteos",
+      "icon": "yogurt",
+      "pantryStaple": false
+    },
+    {
+      "id": "arandanos",
+      "name": "Arándanos",
+      "category": "frutas",
+      "icon": "berries",
+      "pantryStaple": false
+    },
+    {
+      "id": "banano",
+      "name": "Banano",
+      "category": "frutas",
+      "icon": "banana",
+      "pantryStaple": false
+    },
+    {
+      "id": "fresa",
+      "name": "Fresas",
+      "category": "frutas",
+      "icon": "strawberry",
+      "pantryStaple": false
+    },
+    {
+      "id": "limon",
+      "name": "Limón",
+      "category": "frutas",
+      "icon": "lemon",
+      "pantryStaple": false
+    },
+    {
+      "id": "aguacate",
+      "name": "Aguacate",
+      "category": "frutas",
+      "icon": "avocado",
+      "pantryStaple": false
+    },
+    {
+      "id": "manzana",
+      "name": "Manzana",
+      "category": "frutas",
+      "icon": "apple",
+      "pantryStaple": false
+    },
+    {
+      "id": "tomate",
+      "name": "Tomate",
+      "category": "verduras",
+      "icon": "tomato",
+      "pantryStaple": false
+    },
+    {
+      "id": "cebolla",
+      "name": "Cebolla",
+      "category": "verduras",
+      "icon": "onion",
+      "pantryStaple": false
+    },
+    {
+      "id": "cebolla-cabezona",
+      "name": "Cebolla cabezona",
+      "category": "verduras",
+      "icon": "onion",
+      "pantryStaple": false,
+      "family": "cebolla"
+    },
+    {
+      "id": "cebolla-larga",
+      "name": "Cebolla larga",
+      "category": "verduras",
+      "icon": "scallion",
+      "pantryStaple": false,
+      "family": "cebolla"
+    },
+    {
+      "id": "ajo",
+      "name": "Ajo",
+      "category": "verduras",
+      "icon": "garlic",
+      "pantryStaple": false
+    },
+    {
+      "id": "papa",
+      "name": "Papa",
+      "category": "verduras",
+      "icon": "potato",
+      "pantryStaple": false
+    },
+    {
+      "id": "papa-criolla",
+      "name": "Papa criolla",
+      "category": "verduras",
+      "icon": "potato",
+      "pantryStaple": false,
+      "family": "papa"
+    },
+    {
+      "id": "zanahoria",
+      "name": "Zanahoria",
+      "category": "verduras",
+      "icon": "carrot",
+      "pantryStaple": false
+    },
+    {
+      "id": "pimenton",
+      "name": "Pimentón",
+      "category": "verduras",
+      "icon": "pepper",
+      "pantryStaple": false
+    },
+    {
+      "id": "cilantro",
+      "name": "Cilantro",
+      "category": "verduras",
+      "icon": "herb",
+      "pantryStaple": false
+    },
+    {
+      "id": "guascas",
+      "name": "Guascas",
+      "category": "verduras",
+      "icon": "herb",
+      "pantryStaple": false
+    },
+    {
+      "id": "mazorca",
+      "name": "Mazorca",
+      "category": "verduras",
+      "icon": "corn",
+      "pantryStaple": false
+    },
+    {
+      "id": "espinaca",
+      "name": "Espinaca",
+      "category": "verduras",
+      "icon": "leaf",
+      "pantryStaple": false
+    },
+    {
+      "id": "pollo",
+      "name": "Pollo",
+      "category": "proteinas",
+      "icon": "chicken",
+      "pantryStaple": false
+    },
+    {
+      "id": "pechuga",
+      "name": "Pechuga de pollo",
+      "category": "proteinas",
+      "icon": "chicken",
+      "pantryStaple": false,
+      "family": "pollo"
+    },
+    {
+      "id": "carne-molida",
+      "name": "Carne molida",
+      "category": "proteinas",
+      "icon": "meat",
+      "pantryStaple": false
+    },
+    {
+      "id": "tocineta",
+      "name": "Tocineta",
+      "category": "proteinas",
+      "icon": "bacon",
+      "pantryStaple": false
+    },
+    {
+      "id": "atun",
+      "name": "Atún en lata",
+      "category": "proteinas",
+      "icon": "can",
+      "pantryStaple": false
+    },
+    {
+      "id": "frijoles",
+      "name": "Fríjoles cocidos",
+      "category": "proteinas",
+      "icon": "beans",
+      "pantryStaple": false
+    },
+    {
+      "id": "harina",
+      "name": "Harina de trigo",
+      "category": "harinas",
+      "icon": "flour",
+      "pantryStaple": false
+    },
+    {
+      "id": "harina-maiz",
+      "name": "Harina de maíz precocida",
+      "category": "harinas",
+      "icon": "flour",
+      "pantryStaple": false
+    },
+    {
+      "id": "arroz",
+      "name": "Arroz",
+      "category": "harinas",
+      "icon": "rice",
+      "pantryStaple": false
+    },
+    {
+      "id": "pasta",
+      "name": "Pasta",
+      "category": "harinas",
+      "icon": "pasta",
+      "pantryStaple": false
+    },
+    {
+      "id": "avena",
+      "name": "Avena en hojuelas",
+      "category": "harinas",
+      "icon": "oats",
+      "pantryStaple": false
+    },
+    {
+      "id": "pan",
+      "name": "Pan",
+      "category": "harinas",
+      "icon": "bread",
+      "pantryStaple": false
+    },
+    {
+      "id": "pan-tajado",
+      "name": "Pan tajado",
+      "category": "harinas",
+      "icon": "bread",
+      "pantryStaple": false,
+      "family": "pan"
+    },
+    {
+      "id": "arepa",
+      "name": "Arepas",
+      "category": "harinas",
+      "icon": "arepa",
+      "pantryStaple": false
+    },
+    {
+      "id": "tortilla-trigo",
+      "name": "Tortillas de trigo",
+      "category": "harinas",
+      "icon": "arepa",
+      "pantryStaple": false
+    },
+    {
+      "id": "sal",
+      "name": "Sal",
+      "category": "despensa",
+      "icon": "salt",
+      "pantryStaple": true
+    },
+    {
+      "id": "aceite",
+      "name": "Aceite",
+      "category": "despensa",
+      "icon": "oil",
+      "pantryStaple": true
+    },
+    {
+      "id": "azucar",
+      "name": "Azúcar",
+      "category": "despensa",
+      "icon": "sugar",
+      "pantryStaple": true
+    },
+    {
+      "id": "agua",
+      "name": "Agua",
+      "category": "despensa",
+      "icon": "water",
+      "pantryStaple": true
+    },
+    {
+      "id": "pimienta",
+      "name": "Pimienta",
+      "category": "despensa",
+      "icon": "spice",
+      "pantryStaple": true
+    },
+    {
+      "id": "polvo-hornear",
+      "name": "Polvo de hornear",
+      "category": "despensa",
+      "icon": "jar",
+      "pantryStaple": false
+    },
+    {
+      "id": "miel",
+      "name": "Miel",
+      "category": "despensa",
+      "icon": "honey",
+      "pantryStaple": false
+    },
+    {
+      "id": "canela",
+      "name": "Canela",
+      "category": "despensa",
+      "icon": "cinnamon",
+      "pantryStaple": false
+    },
+    {
+      "id": "comino",
+      "name": "Comino",
+      "category": "despensa",
+      "icon": "spice",
+      "pantryStaple": false
+    },
+    {
+      "id": "chocolate",
+      "name": "Chocolate de mesa",
+      "category": "despensa",
+      "icon": "chocolate",
+      "pantryStaple": false
+    },
+    {
+      "id": "vainilla",
+      "name": "Esencia de vainilla",
+      "category": "despensa",
+      "icon": "oil",
+      "pantryStaple": false
+    }
+  ],
+  "recipes": [
+    {
+      "id": "pancakes-arandanos",
+      "name": "Pancakes de arándanos",
+      "description": "Esponjosos, con arándanos que revientan en la sartén.",
+      "meals": [
+        "desayuno",
+        "once"
+      ],
+      "prepMinutes": 10,
+      "cookMinutes": 15,
+      "servings": 4,
+      "difficulty": 1,
+      "ingredients": [
+        {
+          "ingredientId": "harina",
+          "optional": false,
+          "qty": 1.5,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "leche",
+          "optional": false,
+          "qty": 1.25,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "huevo",
+          "optional": false,
+          "qty": 1
+        },
+        {
+          "ingredientId": "azucar",
+          "optional": false,
+          "qty": 2,
+          "unit": "cda"
+        },
+        {
+          "ingredientId": "polvo-hornear",
+          "optional": false,
+          "qty": 2,
+          "unit": "cdta"
+        },
+        {
+          "ingredientId": "mantequilla",
+          "optional": false,
+          "qty": 2,
+          "unit": "cda",
+          "note": "derretida"
+        },
+        {
+          "ingredientId": "arandanos",
+          "optional": false,
+          "qty": 1,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "sal",
+          "optional": false,
+          "note": "una pizca"
+        },
+        {
+          "ingredientId": "miel",
+          "optional": true
+        }
+      ],
+      "steps": [
+        {
+          "text": "Mezcla en un tazón la harina, el azúcar, el polvo de hornear y la sal."
+        },
+        {
+          "text": "En otro tazón bate la leche, el huevo y la mantequilla derretida."
+        },
+        {
+          "text": "Une los líquidos con los secos sin batir de más: está bien si quedan grumos."
+        },
+        {
+          "text": "Calienta una sartén a fuego medio con un poco de mantequilla. Vierte ¼ de taza de mezcla y reparte arándanos encima.",
+          "minutes": 2
+        },
+        {
+          "text": "Voltea cuando salgan burbujas en la superficie y dora el otro lado.",
+          "minutes": 1
+        },
+        {
+          "text": "Sirve con miel o más arándanos."
+        }
+      ],
+      "tags": [
+        "dulce"
+      ]
+    },
+    {
+      "id": "huevos-pericos",
+      "name": "Huevos pericos con arepa",
+      "description": "El desayuno de siempre: huevo revuelto con tomate y cebolla.",
+      "meals": [
+        "desayuno",
+        "cena"
+      ],
+      "prepMinutes": 5,
+      "cookMinutes": 10,
+      "servings": 2,
+      "difficulty": 1,
+      "ingredients": [
+        {
+          "ingredientId": "huevo",
+          "optional": false,
+          "qty": 4
+        },
+        {
+          "ingredientId": "tomate",
+          "optional": false,
+          "qty": 1,
+          "note": "picado"
+        },
+        {
+          "ingredientId": "cebolla",
+          "optional": false,
+          "qty": 0.5,
+          "note": "picada"
+        },
+        {
+          "ingredientId": "arepa",
+          "optional": false,
+          "qty": 2
+        },
+        {
+          "ingredientId": "mantequilla",
+          "optional": false,
+          "qty": 1,
+          "unit": "cda"
+        },
+        {
+          "ingredientId": "sal",
+          "optional": false
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sofríe la cebolla en la mantequilla hasta que esté transparente.",
+          "minutes": 3
+        },
+        {
+          "text": "Agrega el tomate y cocina hasta que suelte el jugo.",
+          "minutes": 3
+        },
+        {
+          "text": "Bate los huevos con sal, viértelos y revuelve suave hasta que cuajen."
+        },
+        {
+          "text": "Asa las arepas y sirve al lado."
+        }
+      ],
+      "tags": [
+        "rápida"
+      ]
+    },
+    {
+      "id": "changua",
+      "name": "Changua",
+      "description": "Caldo de leche con huevo, cebolla larga y cilantro. Receta bogotana.",
+      "meals": [
+        "desayuno"
+      ],
+      "prepMinutes": 5,
+      "cookMinutes": 15,
+      "servings": 2,
+      "difficulty": 1,
+      "ingredients": [
+        {
+          "ingredientId": "leche",
+          "optional": false,
+          "qty": 2,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "agua",
+          "optional": false,
+          "qty": 1,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "huevo",
+          "optional": false,
+          "qty": 2
+        },
+        {
+          "ingredientId": "cebolla-larga",
+          "optional": false,
+          "qty": 1,
+          "unit": "tallo",
+          "note": "picado"
+        },
+        {
+          "ingredientId": "cilantro",
+          "optional": false,
+          "note": "picado"
+        },
+        {
+          "ingredientId": "pan",
+          "optional": false,
+          "qty": 2,
+          "unit": "tajada",
+          "note": "o calado"
+        },
+        {
+          "ingredientId": "sal",
+          "optional": false
+        }
+      ],
+      "steps": [
+        {
+          "text": "Hierve el agua con la leche, la cebolla larga y sal.",
+          "minutes": 5
+        },
+        {
+          "text": "Baja el fuego y rompe los huevos directamente en el caldo, sin revolver.",
+          "minutes": 4
+        },
+        {
+          "text": "Pon el pan en el fondo del plato, sirve encima y termina con cilantro."
+        }
+      ],
+      "tags": [
+        "tradicional"
+      ]
+    },
+    {
+      "id": "calentado",
+      "name": "Calentado paisa",
+      "description": "Arroz y fríjoles del día anterior, salteados, con huevo frito.",
+      "meals": [
+        "desayuno"
+      ],
+      "prepMinutes": 5,
+      "cookMinutes": 12,
+      "servings": 2,
+      "difficulty": 1,
+      "ingredients": [
+        {
+          "ingredientId": "arroz",
+          "optional": false,
+          "qty": 1,
+          "unit": "taza",
+          "note": "cocido"
+        },
+        {
+          "ingredientId": "frijoles",
+          "optional": false,
+          "qty": 1,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "huevo",
+          "optional": false,
+          "qty": 2
+        },
+        {
+          "ingredientId": "cebolla",
+          "optional": false,
+          "qty": 0.5
+        },
+        {
+          "ingredientId": "tomate",
+          "optional": false,
+          "qty": 1
+        },
+        {
+          "ingredientId": "aceite",
+          "optional": false,
+          "qty": 1,
+          "unit": "cda"
+        },
+        {
+          "ingredientId": "arepa",
+          "optional": true,
+          "qty": 2
+        },
+        {
+          "ingredientId": "sal",
+          "optional": false
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sofríe la cebolla y el tomate en el aceite.",
+          "minutes": 4
+        },
+        {
+          "text": "Agrega el arroz y los fríjoles; revuelve hasta que se calienten bien.",
+          "minutes": 5
+        },
+        {
+          "text": "En otra sartén fríe los huevos.",
+          "minutes": 3
+        },
+        {
+          "text": "Sirve el calentado con el huevo encima y una arepa al lado."
+        }
+      ],
+      "tags": [
+        "aprovechamiento"
+      ]
+    },
+    {
+      "id": "ajiaco",
+      "name": "Ajiaco santafereño",
+      "description": "Sopa espesa de tres papas, pollo, mazorca y guascas.",
+      "meals": [
+        "almuerzo"
+      ],
+      "prepMinutes": 20,
+      "cookMinutes": 60,
+      "servings": 6,
+      "difficulty": 2,
+      "ingredients": [
+        {
+          "ingredientId": "pechuga",
+          "optional": false,
+          "qty": 2
+        },
+        {
+          "ingredientId": "papa-criolla",
+          "optional": false,
+          "qty": 500,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "papa",
+          "optional": false,
+          "qty": 500,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "mazorca",
+          "optional": false,
+          "qty": 3,
+          "note": "en trozos"
+        },
+        {
+          "ingredientId": "guascas",
+          "optional": false,
+          "qty": 1,
+          "unit": "manojo"
+        },
+        {
+          "ingredientId": "cebolla-larga",
+          "optional": false,
+          "qty": 2,
+          "unit": "tallo"
+        },
+        {
+          "ingredientId": "ajo",
+          "optional": false,
+          "qty": 2,
+          "unit": "diente"
+        },
+        {
+          "ingredientId": "agua",
+          "optional": false,
+          "qty": 3,
+          "unit": "l"
+        },
+        {
+          "ingredientId": "sal",
+          "optional": false
+        },
+        {
+          "ingredientId": "crema-leche",
+          "optional": true
+        },
+        {
+          "ingredientId": "aguacate",
+          "optional": true,
+          "qty": 1
+        }
+      ],
+      "steps": [
+        {
+          "text": "Cocina las pechugas en el agua con la cebolla larga, el ajo y sal. Sácalas y desmecha.",
+          "minutes": 30
+        },
+        {
+          "text": "Agrega al caldo la papa en rodajas y la mazorca.",
+          "minutes": 15
+        },
+        {
+          "text": "Suma la papa criolla y cocina hasta que se deshaga y espese.",
+          "minutes": 15
+        },
+        {
+          "text": "Añade las guascas los últimos 5 minutos y devuelve el pollo."
+        },
+        {
+          "text": "Sirve con crema de leche y aguacate."
+        }
+      ],
+      "tags": [
+        "tradicional",
+        "sopa"
+      ]
+    },
+    {
+      "id": "arroz-con-pollo",
+      "name": "Arroz con pollo",
+      "description": "Un clásico de olla: arroz amarillo con pollo y verduras.",
+      "meals": [
+        "almuerzo",
+        "cena"
+      ],
+      "prepMinutes": 15,
+      "cookMinutes": 35,
+      "servings": 4,
+      "difficulty": 2,
+      "ingredients": [
+        {
+          "ingredientId": "arroz",
+          "optional": false,
+          "qty": 2,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "pollo",
+          "optional": false,
+          "qty": 500,
+          "unit": "g",
+          "note": "desmechado"
+        },
+        {
+          "ingredientId": "zanahoria",
+          "optional": false,
+          "qty": 1,
+          "note": "en cubos"
+        },
+        {
+          "ingredientId": "pimenton",
+          "optional": false,
+          "qty": 1
+        },
+        {
+          "ingredientId": "cebolla",
+          "optional": false,
+          "qty": 1
+        },
+        {
+          "ingredientId": "ajo",
+          "optional": false,
+          "qty": 2,
+          "unit": "diente"
+        },
+        {
+          "ingredientId": "agua",
+          "optional": false,
+          "qty": 4,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "aceite",
+          "optional": false,
+          "qty": 2,
+          "unit": "cda"
+        },
+        {
+          "ingredientId": "sal",
+          "optional": false
+        },
+        {
+          "ingredientId": "comino",
+          "optional": true
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sofríe la cebolla, el ajo y el pimentón en el aceite.",
+          "minutes": 5
+        },
+        {
+          "text": "Agrega la zanahoria y el pollo, y sazona con sal y comino."
+        },
+        {
+          "text": "Suma el arroz, revuelve un minuto y agrega el agua.",
+          "minutes": 2
+        },
+        {
+          "text": "Cocina a fuego alto hasta que se seque, luego tapa y deja a fuego bajo.",
+          "minutes": 20
+        }
+      ],
+      "tags": [
+        "olla"
+      ]
+    },
+    {
+      "id": "pasta-pomodoro",
+      "name": "Pasta al pomodoro",
+      "description": "Tomate, ajo y aceite. Nada más hace falta.",
+      "meals": [
+        "almuerzo",
+        "cena"
+      ],
+      "prepMinutes": 5,
+      "cookMinutes": 20,
+      "servings": 2,
+      "difficulty": 1,
+      "ingredients": [
+        {
+          "ingredientId": "pasta",
+          "optional": false,
+          "qty": 200,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "tomate",
+          "optional": false,
+          "qty": 4,
+          "note": "maduros"
+        },
+        {
+          "ingredientId": "ajo",
+          "optional": false,
+          "qty": 2,
+          "unit": "diente"
+        },
+        {
+          "ingredientId": "aceite",
+          "optional": false,
+          "qty": 3,
+          "unit": "cda"
+        },
+        {
+          "ingredientId": "sal",
+          "optional": false
+        },
+        {
+          "ingredientId": "queso-parmesano",
+          "optional": true
+        }
+      ],
+      "steps": [
+        {
+          "text": "Cocina la pasta en agua con sal hasta que esté al dente.",
+          "minutes": 10
+        },
+        {
+          "text": "Mientras tanto, dora el ajo en el aceite y agrega el tomate picado.",
+          "minutes": 10
+        },
+        {
+          "text": "Mezcla la pasta con la salsa y un chorrito del agua de cocción."
+        },
+        {
+          "text": "Termina con parmesano rallado."
+        }
+      ],
+      "tags": [
+        "rápida",
+        "vegetariana"
+      ]
+    },
+    {
+      "id": "pasta-bolonesa",
+      "name": "Pasta a la boloñesa",
+      "description": "Salsa de carne molida con zanahoria, lenta y generosa.",
+      "meals": [
+        "almuerzo",
+        "cena"
+      ],
+      "prepMinutes": 10,
+      "cookMinutes": 35,
+      "servings": 4,
+      "difficulty": 2,
+      "ingredients": [
+        {
+          "ingredientId": "pasta",
+          "optional": false,
+          "qty": 400,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "carne-molida",
+          "optional": false,
+          "qty": 400,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "tomate",
+          "optional": false,
+          "qty": 4
+        },
+        {
+          "ingredientId": "cebolla",
+          "optional": false,
+          "qty": 1
+        },
+        {
+          "ingredientId": "zanahoria",
+          "optional": false,
+          "qty": 1,
+          "note": "rallada"
+        },
+        {
+          "ingredientId": "ajo",
+          "optional": false,
+          "qty": 2,
+          "unit": "diente"
+        },
+        {
+          "ingredientId": "aceite",
+          "optional": false,
+          "qty": 2,
+          "unit": "cda"
+        },
+        {
+          "ingredientId": "sal",
+          "optional": false
+        },
+        {
+          "ingredientId": "queso",
+          "optional": true
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sofríe la cebolla, el ajo y la zanahoria.",
+          "minutes": 5
+        },
+        {
+          "text": "Agrega la carne y dórala bien, deshaciéndola con la cuchara.",
+          "minutes": 8
+        },
+        {
+          "text": "Suma el tomate picado, sal, y cocina tapado a fuego bajo.",
+          "minutes": 20
+        },
+        {
+          "text": "Cocina la pasta y sírvela con la salsa y queso.",
+          "minutes": 10
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "quesadillas",
+      "name": "Quesadillas de pollo",
+      "description": "Tortillas doradas, queso que se estira.",
+      "meals": [
+        "cena",
+        "entrecomidas"
+      ],
+      "prepMinutes": 5,
+      "cookMinutes": 10,
+      "servings": 2,
+      "difficulty": 1,
+      "ingredients": [
+        {
+          "ingredientId": "tortilla-trigo",
+          "optional": false,
+          "qty": 4
+        },
+        {
+          "ingredientId": "queso-mozzarella",
+          "optional": false,
+          "qty": 150,
+          "unit": "g"
+        },
+        {
+          "ingredientId": "pollo",
+          "optional": false,
+          "qty": 1,
+          "unit": "taza",
+          "note": "desmechado"
+        },
+        {
+          "ingredientId": "pimenton",
+          "optional": true,
+          "qty": 0.5
+        },
+        {
+          "ingredientId": "aceite",
+          "optional": false,
+          "qty": 1,
+          "unit": "cdta"
+        }
+      ],
+      "steps": [
+        {
+          "text": "Reparte queso, pollo y pimentón sobre media tortilla y dobla."
+        },
+        {
+          "text": "Dora en sartén caliente por ambos lados hasta que el queso se derrita.",
+          "minutes": 4
+        },
+        {
+          "text": "Corta en triángulos."
+        }
+      ],
+      "tags": [
+        "rápida"
+      ]
+    },
+    {
+      "id": "tostadas-aguacate",
+      "name": "Tostadas de aguacate",
+      "description": "Pan tostado, aguacate con limón y un huevo si hay.",
+      "meals": [
+        "desayuno",
+        "entrecomidas"
+      ],
+      "prepMinutes": 5,
+      "cookMinutes": 5,
+      "servings": 2,
+      "difficulty": 1,
+      "ingredients": [
+        {
+          "ingredientId": "pan",
+          "optional": false,
+          "qty": 2,
+          "unit": "tajada"
+        },
+        {
+          "ingredientId": "aguacate",
+          "optional": false,
+          "qty": 1
+        },
+        {
+          "ingredientId": "limon",
+          "optional": false,
+          "qty": 0.5
+        },
+        {
+          "ingredientId": "sal",
+          "optional": false
+        },
+        {
+          "ingredientId": "pimienta",
+          "optional": false
+        },
+        {
+          "ingredientId": "huevo",
+          "optional": true,
+          "qty": 2
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tuesta el pan."
+        },
+        {
+          "text": "Machaca el aguacate con limón, sal y pimienta."
+        },
+        {
+          "text": "Unta sobre el pan y, si quieres, pon un huevo frito encima."
+        }
+      ],
+      "tags": [
+        "rápida",
+        "vegetariana"
+      ]
+    },
+    {
+      "id": "avena-banano",
+      "name": "Avena caliente con banano",
+      "description": "Cremosa, con canela. Buena para días fríos.",
+      "meals": [
+        "desayuno"
+      ],
+      "prepMinutes": 2,
+      "cookMinutes": 10,
+      "servings": 2,
+      "difficulty": 1,
+      "ingredients": [
+        {
+          "ingredientId": "avena",
+          "optional": false,
+          "qty": 1,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "leche",
+          "optional": false,
+          "qty": 2,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "banano",
+          "optional": false,
+          "qty": 1,
+          "note": "en rodajas"
+        },
+        {
+          "ingredientId": "canela",
+          "optional": false,
+          "qty": 1,
+          "unit": "astilla"
+        },
+        {
+          "ingredientId": "miel",
+          "optional": true
+        },
+        {
+          "ingredientId": "arandanos",
+          "optional": true
+        }
+      ],
+      "steps": [
+        {
+          "text": "Calienta la leche con la canela.",
+          "minutes": 3
+        },
+        {
+          "text": "Agrega la avena y revuelve a fuego bajo hasta que espese.",
+          "minutes": 6
+        },
+        {
+          "text": "Sirve con banano, miel y arándanos por encima."
+        }
+      ],
+      "tags": [
+        "dulce",
+        "vegetariana"
+      ]
+    },
+    {
+      "id": "batido-fresa",
+      "name": "Batido de fresa",
+      "description": "Fresas, leche y un toque de yogur.",
+      "meals": [
+        "entrecomidas",
+        "once",
+        "desayuno"
+      ],
+      "prepMinutes": 5,
+      "cookMinutes": 0,
+      "servings": 2,
+      "difficulty": 1,
+      "ingredients": [
+        {
+          "ingredientId": "fresa",
+          "optional": false,
+          "qty": 1.5,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "leche",
+          "optional": false,
+          "qty": 1.5,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "azucar",
+          "optional": false,
+          "qty": 1,
+          "unit": "cda"
+        },
+        {
+          "ingredientId": "yogur",
+          "optional": true,
+          "qty": 0.5,
+          "unit": "taza"
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lava las fresas y quítales el cabo."
+        },
+        {
+          "text": "Licúa todo hasta que quede liso. Sirve frío."
+        }
+      ],
+      "tags": [
+        "bebida",
+        "rápida"
+      ]
+    },
+    {
+      "id": "chocolate-queso",
+      "name": "Chocolate con queso",
+      "description": "La once santafereña: chocolate espumoso con queso que se derrite adentro.",
+      "meals": [
+        "once"
+      ],
+      "prepMinutes": 2,
+      "cookMinutes": 10,
+      "servings": 2,
+      "difficulty": 1,
+      "ingredients": [
+        {
+          "ingredientId": "chocolate",
+          "optional": false,
+          "qty": 2,
+          "unit": "pastilla"
+        },
+        {
+          "ingredientId": "leche",
+          "optional": false,
+          "qty": 2,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "agua",
+          "optional": false,
+          "qty": 0.5,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "queso-campesino",
+          "optional": false,
+          "qty": 100,
+          "unit": "g",
+          "note": "en cubos"
+        },
+        {
+          "ingredientId": "pan",
+          "optional": false,
+          "qty": 2
+        }
+      ],
+      "steps": [
+        {
+          "text": "Hierve la leche con el agua y el chocolate hasta que se disuelva.",
+          "minutes": 6
+        },
+        {
+          "text": "Bate con molinillo hasta que haga espuma."
+        },
+        {
+          "text": "Sirve con el queso adentro de la taza y pan al lado."
+        }
+      ],
+      "tags": [
+        "tradicional",
+        "bebida"
+      ]
+    },
+    {
+      "id": "ensalada-atun",
+      "name": "Ensalada de atún",
+      "description": "Fresca, rápida y sin estufa.",
+      "meals": [
+        "almuerzo",
+        "cena",
+        "entrecomidas"
+      ],
+      "prepMinutes": 10,
+      "cookMinutes": 0,
+      "servings": 2,
+      "difficulty": 1,
+      "ingredients": [
+        {
+          "ingredientId": "atun",
+          "optional": false,
+          "qty": 1,
+          "unit": "lata"
+        },
+        {
+          "ingredientId": "tomate",
+          "optional": false,
+          "qty": 2
+        },
+        {
+          "ingredientId": "cebolla",
+          "optional": false,
+          "qty": 0.5
+        },
+        {
+          "ingredientId": "limon",
+          "optional": false,
+          "qty": 1
+        },
+        {
+          "ingredientId": "aceite",
+          "optional": false,
+          "qty": 1,
+          "unit": "cda"
+        },
+        {
+          "ingredientId": "sal",
+          "optional": false
+        },
+        {
+          "ingredientId": "aguacate",
+          "optional": true,
+          "qty": 1
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pica el tomate, la cebolla y el aguacate."
+        },
+        {
+          "text": "Escurre el atún y mezcla todo."
+        },
+        {
+          "text": "Aliña con limón, aceite y sal."
+        }
+      ],
+      "tags": [
+        "rápida",
+        "sin estufa"
+      ]
+    },
+    {
+      "id": "galletas-avena",
+      "name": "Galletas de avena y banano",
+      "description": "Dos ingredientes base, sin harina. Ideales para la lonchera.",
+      "meals": [
+        "once",
+        "entrecomidas"
+      ],
+      "prepMinutes": 10,
+      "cookMinutes": 15,
+      "servings": 12,
+      "difficulty": 1,
+      "ingredients": [
+        {
+          "ingredientId": "avena",
+          "optional": false,
+          "qty": 1.5,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "banano",
+          "optional": false,
+          "qty": 2,
+          "note": "muy maduros"
+        },
+        {
+          "ingredientId": "canela",
+          "optional": false,
+          "note": "molida"
+        },
+        {
+          "ingredientId": "arandanos",
+          "optional": true,
+          "qty": 0.5,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "miel",
+          "optional": true,
+          "qty": 1,
+          "unit": "cda"
+        }
+      ],
+      "steps": [
+        {
+          "text": "Precalienta el horno a 180 °C."
+        },
+        {
+          "text": "Machaca el banano y mezcla con la avena, la canela y los arándanos."
+        },
+        {
+          "text": "Forma bolitas, aplánalas en una bandeja y hornea hasta dorar.",
+          "minutes": 15
+        }
+      ],
+      "tags": [
+        "dulce",
+        "horno"
+      ]
+    },
+    {
+      "id": "tortilla-espanola",
+      "name": "Tortilla de papa",
+      "description": "Papa y cebolla confitadas, cuajadas en huevo.",
+      "meals": [
+        "almuerzo",
+        "cena"
+      ],
+      "prepMinutes": 10,
+      "cookMinutes": 30,
+      "servings": 4,
+      "difficulty": 2,
+      "ingredients": [
+        {
+          "ingredientId": "papa",
+          "optional": false,
+          "qty": 4
+        },
+        {
+          "ingredientId": "huevo",
+          "optional": false,
+          "qty": 5
+        },
+        {
+          "ingredientId": "cebolla",
+          "optional": false,
+          "qty": 1
+        },
+        {
+          "ingredientId": "aceite",
+          "optional": false,
+          "qty": 0.5,
+          "unit": "taza"
+        },
+        {
+          "ingredientId": "sal",
+          "optional": false
+        }
+      ],
+      "steps": [
+        {
+          "text": "Corta la papa y la cebolla en láminas finas y cocínalas en el aceite a fuego bajo hasta que estén tiernas.",
+          "minutes": 20
+        },
+        {
+          "text": "Escúrrelas y mézclalas con los huevos batidos y sal."
+        },
+        {
+          "text": "Cuaja en sartén a fuego medio, voltea con ayuda de un plato y termina el otro lado.",
+          "minutes": 6
+        }
+      ],
+      "tags": []
+    }
+  ]
+}

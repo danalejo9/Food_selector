@@ -1,0 +1,105 @@
+import { NavLink, Route, Routes, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { baseErrors, baseRecetario, RecetarioProvider } from './data/store'
+import { PersonalProvider, usePersonal } from './data/personal'
+import { Cocina } from './pages/Cocina'
+import { RecetaDetalle } from './pages/RecetaDetalle'
+import { ModoCocinar } from './pages/ModoCocinar'
+import { ListaCompras } from './pages/ListaCompras'
+import { Recetario } from './pages/Recetario'
+import { RecetaEditor } from './pages/RecetaEditor'
+import { DraftBar } from './components/DraftBar'
+
+export function App() {
+  if (!baseRecetario) return <BrokenFile errors={baseErrors} />
+  return (
+    <RecetarioProvider base={baseRecetario}>
+      <PersonalProvider>
+        <Shell />
+      </PersonalProvider>
+    </RecetarioProvider>
+  )
+}
+
+function Shell() {
+  const { pathname } = useLocation()
+  const cooking = pathname.endsWith('/cocinar')
+  useEffect(() => window.scrollTo(0, 0), [pathname])
+
+  if (cooking)
+    return (
+      <Routes>
+        <Route path="/receta/:id/cocinar" element={<ModoCocinar />} />
+      </Routes>
+    )
+
+  return (
+    <div className="shell">
+      <Masthead />
+      {pathname.startsWith('/recetario') && <DraftBar />}
+      <main className="main">
+        <Routes>
+          <Route path="/" element={<Cocina />} />
+          <Route path="/receta/:id" element={<RecetaDetalle />} />
+          <Route path="/compras" element={<ListaCompras />} />
+          <Route path="/recetario" element={<Recetario />} />
+          <Route path="/recetario/:tab" element={<Recetario />} />
+          <Route path="/recetario/receta/nueva" element={<RecetaEditor />} />
+          <Route path="/recetario/receta/:id" element={<RecetaEditor />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+    </div>
+  )
+}
+
+function Masthead() {
+  const { shopping } = usePersonal()
+  const pending = shopping.filter((s) => !s.done).length
+  return (
+    <header className="masthead">
+      <NavLink to="/" className="masthead__brand" aria-label="La Nevera, inicio">
+        <span className="masthead__title">La Nevera</span>
+        <span className="masthead__sub">¿qué cocino hoy?</span>
+      </NavLink>
+      <nav className="masthead__nav" aria-label="Secciones">
+        <NavLink to="/" end>
+          Cocina
+        </NavLink>
+        <NavLink to="/compras">
+          Compras{pending > 0 && <span className="count">{pending}</span>}
+        </NavLink>
+        <NavLink to="/recetario">Recetario</NavLink>
+      </nav>
+    </header>
+  )
+}
+
+function NotFound() {
+  return (
+    <div className="empty">
+      <h2>Esta página no está en el recetario.</h2>
+      <NavLink to="/" className="btn">
+        Volver a la cocina
+      </NavLink>
+    </div>
+  )
+}
+
+function BrokenFile({ errors }: { errors: string[] }) {
+  return (
+    <div className="broken">
+      <h1>El archivo del recetario tiene errores</h1>
+      <p>
+        Revisa <code>data/recetario.json</code>. Puedes correr <code>npm run validate</code> para ver lo mismo en la terminal.
+      </p>
+      <ul>
+        {errors.slice(0, 30).map((e) => (
+          <li key={e}>
+            <code>{e}</code>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
