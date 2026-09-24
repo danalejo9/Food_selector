@@ -4,6 +4,7 @@ import { ArrowLeft, Check, CircleAlert, Heart, Minus, Plus } from 'lucide-react'
 import { RecipeImage } from '../components/RecipeArt'
 import { FoodIcon } from '../components/FoodIcon'
 import { useRecetario } from '../data/store'
+import { useEditor } from '../data/editor'
 import { cookedLabel, today, usePersonal } from '../data/personal'
 import { buildAvailable } from '../lib/match'
 import { formatAmount, formatMinutes, totalMinutes } from '../lib/units'
@@ -19,6 +20,7 @@ export function RecetaDetalle() {
   const cameFromList = !!(useLocation().state as { back?: boolean } | null)?.back
   const { recetario, ingredientsById } = useRecetario()
   const p = usePersonal()
+  const { canEdit } = useEditor()
   const toast = useToast()
   const recipe = recetario.recipes.find((r) => r.id === id)
   const [servings, setServings] = useState(recipe?.servings ?? 1)
@@ -180,11 +182,13 @@ export function RecetaDetalle() {
             ))}
           </ol>
           {recipe.tags.length > 0 && <p className="muted small tags">{recipe.tags.join(', ')}</p>}
-          <p className="small">
-            <Link className="link" to={`/recetario/receta/${recipe.id}`}>
-              Editar esta receta
-            </Link>
-          </p>
+          {canEdit && (
+            <p className="small">
+              <Link className="link" to={`/recetario/receta/${recipe.id}`}>
+                Editar esta receta
+              </Link>
+            </p>
+          )}
         </section>
       </div>
       {toast.node}

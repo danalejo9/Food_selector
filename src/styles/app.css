@@ -463,6 +463,12 @@ textarea.input { resize: vertical; line-height: 1.5; }
 .page-head h1 { font-size: var(--t-40); letter-spacing: -0.03em; }
 .page-head .link { margin-bottom: var(--s1); }
 .page-head p { margin-top: var(--s1); max-width: 600px; }
+.page-head__row { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s1) var(--s2); }
+.mode-label { font-size: 13px; font-weight: 500; color: var(--gris-texto); padding: 2px var(--s1); border: 1px solid var(--concreto); border-radius: 4px; }
+.acceso { max-width: 440px; margin: 0 auto; }
+.acceso .field { margin-top: var(--s1); }
+.acceso__actions { display: flex; flex-wrap: wrap; gap: var(--s1); margin-top: var(--s3); }
+.acceso code { font-size: 13px; }
 .shop__add { display: flex; gap: var(--s1); margin-bottom: var(--s4); }
 .shop__add .input { min-height: 44px; }
 .shop__add .btn { min-height: 44px; }

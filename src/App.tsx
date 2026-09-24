@@ -1,4 +1,4 @@
-import { NavLink, Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, NavLink, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { baseErrors, baseRecetario, RecetarioProvider } from './data/store'
 import { PersonalProvider, usePersonal } from './data/personal'
@@ -9,11 +9,22 @@ import { ListaCompras } from './pages/ListaCompras'
 import { Recetario } from './pages/Recetario'
 import { RecetaEditor } from './pages/RecetaEditor'
 import { DraftBar } from './components/DraftBar'
+import { EditorProvider, useEditor } from './data/editor'
+import { AccesoEditor } from './pages/AccesoEditor'
 
 export function App() {
   if (!baseRecetario) return <BrokenFile errors={baseErrors} />
   return (
-    <RecetarioProvider base={baseRecetario}>
+    <EditorProvider>
+      <WithRecetario />
+    </EditorProvider>
+  )
+}
+
+function WithRecetario() {
+  const { canEdit } = useEditor()
+  return (
+    <RecetarioProvider base={baseRecetario!} canEdit={canEdit}>
       <PersonalProvider>
         <Shell />
       </PersonalProvider>
@@ -21,8 +32,17 @@ export function App() {
   )
 }
 
+/** Las pantallas de edición solo existen en modo editor; los demás van a la ficha. */
+function SoloEditor({ children }: { children: React.ReactNode }) {
+  const { canEdit } = useEditor()
+  const { id } = useParams()
+  if (canEdit) return <>{children}</>
+  return <Navigate to={id ? `/receta/${id}` : '/recetario'} replace />
+}
+
 function Shell() {
   const { pathname } = useLocation()
+  const { canEdit } = useEditor()
   const cooking = pathname.endsWith('/cocinar')
   useEffect(() => window.scrollTo(0, 0), [pathname])
 
@@ -36,7 +56,7 @@ function Shell() {
   return (
     <div className="shell">
       <Masthead />
-      {pathname.startsWith('/recetario') && <DraftBar />}
+      {canEdit && pathname.startsWith('/recetario') && <DraftBar />}
       <main className="main">
         <Routes>
           <Route path="/" element={<Cocina />} />
@@ -44,8 +64,23 @@ function Shell() {
           <Route path="/compras" element={<ListaCompras />} />
           <Route path="/recetario" element={<Recetario />} />
           <Route path="/recetario/:tab" element={<Recetario />} />
-          <Route path="/recetario/receta/nueva" element={<RecetaEditor />} />
-          <Route path="/recetario/receta/:id" element={<RecetaEditor />} />
+          <Route
+            path="/recetario/receta/nueva"
+            element={
+              <SoloEditor>
+                <RecetaEditor />
+              </SoloEditor>
+            }
+          />
+          <Route
+            path="/recetario/receta/:id"
+            element={
+              <SoloEditor>
+                <RecetaEditor />
+              </SoloEditor>
+            }
+          />
+          <Route path="/editor" element={<AccesoEditor />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
