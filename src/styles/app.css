@@ -152,10 +152,15 @@ textarea.input { resize: vertical; line-height: 1.5; }
   grid-column: 1 / span 4;
   position: sticky;
   top: var(--header-h);
-  max-height: calc(100vh - var(--header-h));
+  height: calc(100vh - var(--header-h));
   overflow-y: auto;
-  padding: var(--s4) var(--s2) var(--s5) 0;
+  /* la nevera: bloque asfalto de borde a borde a la izquierda */
+  margin-left: calc(var(--gutter) * -1);
+  padding: var(--s4) var(--s3) var(--s5) var(--gutter);
+  background: var(--asfalto) var(--cubiertos-oscuro) 0 0 / 280px repeat;
+  color: var(--niebla);
   scrollbar-width: thin;
+  scrollbar-color: #4a4f53 transparent;
 }
 .cocina__results { grid-column: 5 / span 8; padding-top: var(--s4); min-width: 0; }
 .sheet-grip, .sheet-toggle { display: none; }
@@ -230,6 +235,28 @@ textarea.input { resize: vertical; line-height: 1.5; }
 .food-emoji { display: inline-grid; place-items: center; line-height: 1; font-size: 13px !important; font-weight: 700; }
 .food-icon { display: block; }
 .food-icon--line * { fill: none !important; stroke: currentColor !important; }
+
+/* ——— la nevera en oscuro ——— */
+.cocina__aside .panel__summary,
+.cocina__aside .kicker,
+.cocina__aside .muted,
+.cocina__aside .panel__count { color: var(--concreto); }
+.cocina__aside .link { color: var(--musgo-claro); }
+.cocina__aside .link:hover { color: #b2c294; }
+.cocina__aside .search input { background: var(--oscuro-superficie); border-color: #3a3f43; color: var(--niebla); }
+.cocina__aside .search input:focus { border-color: var(--musgo-claro); box-shadow: 0 0 0 3px rgba(157, 175, 126, 0.25); }
+.cocina__aside .search input::placeholder,
+.cocina__aside .search svg { color: var(--concreto); }
+.cocina__aside .chip { border-color: #3a3f43; background: var(--asfalto); color: var(--niebla); }
+.cocina__aside .chip:hover { border-color: var(--concreto); background: var(--oscuro-superficie); }
+.cocina__aside .chip__sticker { background: var(--oscuro-superficie); color: var(--niebla); }
+.cocina__aside .chip.is-on { border-color: var(--musgo-claro); background: var(--musgo-claro); color: var(--asfalto); }
+.cocina__aside .chip.is-on:hover { border-color: #b2c294; background: #b2c294; }
+.cocina__aside .chip.is-on .chip__sticker { background: var(--asfalto); color: var(--musgo-claro); }
+.cocina__aside .chip--staple.is-on { border-color: #3a3f43; background: var(--asfalto); color: var(--niebla); }
+.cocina__aside .chip--staple.is-on .chip__sticker { background: var(--oscuro-superficie); color: var(--niebla); }
+.cocina__aside .chip--staple:not(.is-on) { color: var(--concreto); border-color: #55585a; }
+.cocina__aside :focus-visible { outline-color: var(--musgo-claro); }
 
 /* filtros */
 .filters { display: grid; gap: var(--s2); margin-bottom: var(--s1); }
@@ -649,8 +676,9 @@ textarea.input { resize: vertical; line-height: 1.5; }
     inset: 0;
     z-index: 40;
     max-height: none;
+    height: auto;
+    margin-left: 0;
     padding: 0 var(--gutter) 112px;
-    background: var(--superficie);
     transform: translateY(100%);
     transition: transform 280ms var(--ease), visibility 0s linear 280ms;
     visibility: hidden;
@@ -663,12 +691,12 @@ textarea.input { resize: vertical; line-height: 1.5; }
     top: 0;
     z-index: 2;
     padding: 12px 0;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(30, 33, 36, 0.88);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     margin-bottom: var(--s1);
   }
-  .sheet-grip .btn { min-height: 44px; }
+  .sheet-grip .btn { min-height: 44px; border-color: var(--musgo-claro); background: var(--musgo-claro); color: var(--asfalto); }
   .sheet-toggle {
     position: fixed;
     left: var(--gutter);
