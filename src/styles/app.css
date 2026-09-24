@@ -293,6 +293,8 @@ textarea.input { resize: vertical; line-height: 1.5; }
 .intro { margin: var(--s5) 0 0; max-width: 640px; }
 .intro h1 { font-size: var(--t-40); letter-spacing: -0.03em; line-height: 1.1; }
 .intro p { margin-top: var(--s1); font-size: var(--t-20); color: var(--gris-texto); }
+.only-mobile { display: none; }
+.intro__cta { margin-top: var(--s3); min-height: 48px; padding: 0 var(--s3); font-size: var(--t-16); }
 
 .group { margin-top: var(--s6); }
 .group__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-1) var(--s2); margin-bottom: var(--s3); }
@@ -718,6 +720,8 @@ textarea.input { resize: vertical; line-height: 1.5; }
     box-shadow: var(--flota);
   }
   .sheet-toggle > span:last-child { font-size: var(--t-14); font-weight: 400; }
+  .sheet-toggle__main { display: inline-flex; align-items: center; gap: var(--s1); }
+  .only-mobile { display: inline-flex; }
   .chip { min-height: 44px; }
   .chip--child { min-height: 44px; }
   .cocina__results { padding-top: var(--s2); }

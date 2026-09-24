@@ -58,7 +58,7 @@ function RecetasAdmin() {
               </span>
             </Link>
             <div className="admin-list__actions">
-              <Link className="link" to={`/receta/${r.id}`}>
+              <Link className="link" to={`/receta/${r.id}`} state={{ back: true }}>
                 Ver
               </Link>
               <button
