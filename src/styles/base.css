@@ -8,22 +8,19 @@ html {
 }
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font: 15px/1.5 var(--font-body);
+  background: var(--niebla);
+  color: var(--asfalto);
+  font: 400 var(--t-16) / 1.5 var(--font);
   -webkit-font-smoothing: antialiased;
 }
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.1;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   margin: 0;
-  font-variation-settings: 'opsz' 48;
-  letter-spacing: 0;
-  word-spacing: 0.04em;
 }
 p {
   margin: 0;
@@ -46,7 +43,7 @@ img {
   max-width: 100%;
 }
 :focus-visible {
-  outline: 2px solid var(--tomato);
+  outline: 2px solid var(--musgo);
   outline-offset: 2px;
 }
 .visually-hidden {

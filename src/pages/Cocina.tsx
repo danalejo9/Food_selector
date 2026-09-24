@@ -59,7 +59,7 @@ export function Cocina() {
     <div className="cocina">
       <aside className={`cocina__aside${sheetOpen ? ' is-open' : ''}`} aria-label="Ingredientes">
         <div className="sheet-grip">
-          <button className="btn btn--ink" onClick={() => setSheetOpen(false)}>
+          <button className="btn btn--primary" onClick={() => setSheetOpen(false)}>
             Ver {total} {total === 1 ? 'receta' : 'recetas'}
           </button>
         </div>
@@ -105,37 +105,36 @@ export function Cocina() {
             </label>
             {hasFilters && (
               <button className="link" onClick={() => setF(NO_FILTERS)}>
-                quitar filtros
+                Quitar filtros
               </button>
             )}
           </div>
           {!filters.meal && (
             <button className="hint" onClick={() => setF({ meal: suggested })}>
-              Es hora de <b>{MEAL_LABEL[suggested].toLowerCase()}</b> — ver solo eso →
+              Ahora: <b>{MEAL_LABEL[suggested]}</b>
             </button>
           )}
         </div>
 
         {fridge.length === 0 && (
           <div className="intro">
-            <h1>
-              Abre la nevera, <em>toca lo que haya</em>, y aquí aparece lo que puedes cocinar.
-            </h1>
+            <h1>Selecciona lo que tienes.</h1>
+            <p>Las recetas se ordenan al instante según lo que haya en tu nevera.</p>
           </div>
         )}
 
         <ResultGroup
           title="Puedes hacerla"
-          note="tienes todo"
+          note="con lo que tienes"
           items={groups.ready}
           onAddMissing={addMissing}
-          empty={fridge.length > 0 ? 'Aún nada completo. Mira abajo lo que está cerca.' : undefined}
+          empty={fridge.length > 0 ? 'Ninguna receta completa todavía.' : undefined}
         />
-        <ResultGroup title="Te falta poco" note="1 o 2 cosas" items={groups.almost} onAddMissing={addMissing} />
+        <ResultGroup title="Te falta poco" note="faltan 1 o 2 ingredientes" items={groups.almost} onAddMissing={addMissing} />
         {groups.far.length > 0 && (
           <details className="far">
             <summary>
-              Las demás <span className="mono">({groups.far.length})</span>
+              Otras recetas <span className="num">{groups.far.length}</span>
             </summary>
             <div className="grid">
               {groups.far.map((r) => (
@@ -156,9 +155,9 @@ export function Cocina() {
 
       <button className="sheet-toggle" onClick={() => setSheetOpen(true)}>
         <span>
-          Tu nevera <b className="mono">{fridge.length}</b>
+          Tu nevera <b className="num">{fridge.length}</b>
         </span>
-        <span className="mono">
+        <span className="num">
           {groups.ready.length} listas · {groups.almost.length} cerca
         </span>
       </button>
@@ -186,7 +185,7 @@ function ResultGroup({
       <header className="group__head">
         <h2>{title}</h2>
         <span className="group__note">
-          {note} · <span className="mono">{items.length}</span>
+          <span className="num">{items.length}</span> · {note}
         </span>
       </header>
       {items.length ? (

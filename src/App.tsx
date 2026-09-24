@@ -60,14 +60,13 @@ function Masthead() {
     <header className="masthead">
       <NavLink to="/" className="masthead__brand" aria-label="La Nevera, inicio">
         <span className="masthead__title">La Nevera</span>
-        <span className="masthead__sub">¿qué cocino hoy?</span>
       </NavLink>
       <nav className="masthead__nav" aria-label="Secciones">
         <NavLink to="/" end>
           Cocina
         </NavLink>
         <NavLink to="/compras">
-          Compras{pending > 0 && <span className="count">{pending}</span>}
+          Compras{pending > 0 && <span className="count num">{pending}</span>}
         </NavLink>
         <NavLink to="/recetario">Recetario</NavLink>
       </nav>

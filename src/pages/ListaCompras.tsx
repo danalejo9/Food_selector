@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRecetario } from '../data/store'
 import { usePersonal } from '../data/personal'
+import { X } from 'lucide-react'
 import { FoodIcon } from '../components/FoodIcon'
 import { useToast } from '../lib/useToast'
 import { normalizeName } from '../lib/normalize'
@@ -27,7 +28,7 @@ export function ListaCompras() {
     const ids = bought.map((b) => b.ingredientId).filter((x): x is string => !!x)
     p.setFridge([...p.fridge, ...ids])
     p.clearBought()
-    toast.show(ids.length ? `${ids.length} a la nevera` : 'Lista limpia')
+    toast.show(ids.length ? `${ids.length} ${ids.length === 1 ? 'ingrediente pasó' : 'ingredientes pasaron'} a la nevera` : 'Comprados eliminados de la lista')
   }
 
   const Row = ({ item }: { item: (typeof p.shopping)[number] }) => {
@@ -36,14 +37,14 @@ export function ListaCompras() {
       <li className={item.done ? 'is-done' : ''}>
         <label>
           <input type="checkbox" checked={item.done} onChange={() => p.toggleShopping(item.key)} />
-          <span className="shop__icon">{ing ? <FoodIcon icon={ing.icon} size={24} /> : <span className="shop__dot" />}</span>
+          <span className="shop__icon">{ing ? <FoodIcon icon={ing.icon} size={22} /> : null}</span>
           <span className="shop__text">
             {item.text}
-            {item.forRecipe && <span className="muted small"> · para {item.forRecipe}</span>}
+            {item.forRecipe && <span className="muted small shop__for">Para {item.forRecipe}</span>}
           </span>
         </label>
-        <button className="link" aria-label={`Quitar ${item.text}`} onClick={() => p.removeShopping(item.key)}>
-          quitar
+        <button className="icon-btn" aria-label={`Quitar ${item.text}`} onClick={() => p.removeShopping(item.key)}>
+          <X size={18} aria-hidden="true" />
         </button>
       </li>
     )
@@ -53,14 +54,14 @@ export function ListaCompras() {
     <div className="shop">
       <header className="page-head">
         <h1>Lista de compras</h1>
-        <p className="muted">Agrega lo que te falta desde las recetas, o escríbelo aquí.</p>
+        <p className="muted">Lo que falta en las recetas se agrega desde cada tarjeta. También puedes escribirlo aquí.</p>
       </header>
       <form className="shop__add" onSubmit={add}>
-        <input className="input" placeholder="Ej.: huevos, cilantro…" value={text} onChange={(e) => setText(e.target.value)} aria-label="Agregar a la lista" />
-        <button className="btn btn--ink">Agregar</button>
+        <input className="input" placeholder="Ingrediente o producto" value={text} onChange={(e) => setText(e.target.value)} aria-label="Agregar a la lista" />
+        <button className="btn btn--primary">Agregar</button>
       </form>
 
-      {pending.length === 0 && bought.length === 0 && <p className="empty-note">La lista está vacía. Qué bien.</p>}
+      {pending.length === 0 && bought.length === 0 && <p className="empty-note">No hay nada pendiente.</p>}
 
       {pending.length > 0 && (
         <ul className="shop__list">
@@ -74,8 +75,8 @@ export function ListaCompras() {
         <section className="shop__bought">
           <div className="section-head">
             <h2>En el carrito</h2>
-            <button className="btn btn--ink" onClick={toFridge}>
-              Llegué: pasar a la nevera
+            <button className="btn btn--primary" onClick={toFridge}>
+              Pasar a la nevera
             </button>
           </div>
           <ul className="shop__list">

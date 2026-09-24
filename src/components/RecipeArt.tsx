@@ -3,12 +3,14 @@ import { useRecetario } from '../data/store'
 import { FoodIcon } from './FoodIcon'
 import { normalizeName } from '../lib/normalize'
 
+// Ilustración temporal hasta tener fotos reales. El mantel toma tonos de la
+// paleta según el momento del día (la categoría principal del plato).
 const MEAL_TINT: Record<Meal, [string, string]> = {
-  desayuno: ['#E9B949', '#F4D58A'],
-  almuerzo: ['#C8412B', '#E58B73'],
-  once: ['#7A4A33', '#B98A6C'],
-  cena: ['#2F4A5A', '#6F8C9A'],
-  entrecomidas: ['#5E7F45', '#A4BC86'],
+  desayuno: ['#E8B90F', '#F3DC8A'],
+  almuerzo: ['#8E4430', '#C9A092'],
+  once: ['#B9B7B0', '#E3E6E0'],
+  cena: ['#1E2124', '#8A8F93'],
+  entrecomidas: ['#4F5E3A', '#AEB89C'],
 }
 
 /** Posiciones de los ingredientes sobre el plato (en % y grados). */
@@ -49,8 +51,8 @@ export function RecipeArt({ recipe, className }: { recipe: Recipe; className?: s
         </defs>
         <rect width="400" height="300" fill={`url(#${pid})`} />
         <ellipse cx="206" cy="160" rx="118" ry="118" fill="rgba(0,0,0,.14)" />
-        <circle cx="200" cy="150" r="118" fill="#FBF8F2" stroke="#1F1B16" strokeWidth="2" />
-        <circle cx="200" cy="150" r="88" fill="none" stroke="#1F1B16" strokeOpacity=".25" strokeWidth="1.5" />
+        <circle cx="200" cy="150" r="118" fill="#FFFFFF" stroke="#1E2124" strokeWidth="2" />
+        <circle cx="200" cy="150" r="88" fill="none" stroke="#1E2124" strokeOpacity=".2" strokeWidth="1.5" />
       </svg>
       <div className="recipe-art__food">
         {main.map((ing, k) => {
@@ -60,7 +62,7 @@ export function RecipeArt({ recipe, className }: { recipe: Recipe; className?: s
               key={ing.id}
               style={{ left: `${s.x}%`, top: `${s.y}%`, transform: `translate(-50%,-50%) rotate(${s.r}deg) scale(${main.length === 1 ? 1.6 : s.s})` }}
             >
-              <FoodIcon icon={ing.icon} size={56} />
+              <FoodIcon icon={ing.icon} size={56} variant="color" />
             </span>
           )
         })}

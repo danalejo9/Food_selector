@@ -62,15 +62,15 @@ export function CargaMasiva() {
     <section className="bulk">
       <div className="bulk__cards">
         <article className="bulk__card">
-          <span className="bulk__num">1</span>
+          <span className="bulk__num">Paso 1</span>
           <h2>Descarga la plantilla</h2>
           <p className="muted">Un Excel con dos recetas de ejemplo, el catálogo de ingredientes e instrucciones por columna.</p>
-          <button className="btn btn--ink" disabled={!!busy} onClick={() => run('plantilla', () => downloadTemplate(recetario))}>
+          <button className="btn btn--primary" disabled={!!busy} onClick={() => run('plantilla', () => downloadTemplate(recetario))}>
             {busy === 'plantilla' ? 'Generando…' : 'Descargar plantilla .xlsx'}
           </button>
         </article>
         <article className="bulk__card">
-          <span className="bulk__num">2</span>
+          <span className="bulk__num">Paso 2</span>
           <h2>Llénala</h2>
           <p className="muted">
             Una fila por receta. Ingredientes separados por <code>;</code> como <code>harina 1 1/2 taza; huevos 2; miel (opcional)</code>. Pasos uno por
@@ -78,10 +78,10 @@ export function CargaMasiva() {
           </p>
         </article>
         <article className="bulk__card">
-          <span className="bulk__num">3</span>
+          <span className="bulk__num">Paso 3</span>
           <h2>Cárgala</h2>
           <p className="muted">Verás una vista previa con errores y cambios antes de importar. También acepta .csv.</p>
-          <button className="btn btn--ink" disabled={!!busy} onClick={() => fileRef.current?.click()}>
+          <button className="btn btn--primary" disabled={!!busy} onClick={() => fileRef.current?.click()}>
             {busy === 'leyendo' ? 'Leyendo…' : 'Elegir archivo'}
           </button>
           <input
@@ -104,16 +104,16 @@ export function CargaMasiva() {
         <div className="preview">
           <header className="section-head">
             <h2>
-              Vista previa <span className="muted mono small">{fileName}</span>
+              Vista previa <span className="muted small">{fileName}</span>
             </h2>
             <button className="link" onClick={() => setPreview(null)}>
-              cancelar
+              Cancelar
             </button>
           </header>
 
           <p className="preview__summary">
-            <span className="mono">{preview.recipes.length}</span> recetas válidas · <span className="mono">{preview.errors.length}</span> con errores ·{' '}
-            <span className="mono">{preview.newIngredients.length}</span> ingredientes nuevos
+            <span className="num">{preview.recipes.length}</span> recetas válidas · <span className="num">{preview.errors.length}</span> con errores ·{' '}
+            <span className="num">{preview.newIngredients.length}</span> ingredientes nuevos
           </p>
 
           {preview.errors.length > 0 && (
@@ -122,7 +122,7 @@ export function CargaMasiva() {
               <ul>
                 {preview.errors.map((e) => (
                   <li key={e.row}>
-                    <span className="mono">fila {e.row}</span> · <b>{e.name}</b>: {e.messages.join('; ')}
+                    <span className="num">fila {e.row}</span> · <b>{e.name}</b>: {e.messages.join('; ')}
                   </li>
                 ))}
               </ul>
@@ -177,11 +177,11 @@ export function CargaMasiva() {
                 <tbody>
                   {preview.recipes.map((p) => (
                     <tr key={p.row} className={p.duplicateOf && !replace ? 'is-skip' : ''}>
-                      <td className="mono">{p.row}</td>
+                      <td className="num">{p.row}</td>
                       <td>{p.recipe.name}</td>
                       <td>{p.recipe.meals.map((m) => MEAL_LABEL[m]).join(', ')}</td>
-                      <td className="mono">{p.recipe.ingredients.length}</td>
-                      <td className="mono">{p.recipe.steps.length}</td>
+                      <td className="num">{p.recipe.ingredients.length}</td>
+                      <td className="num">{p.recipe.steps.length}</td>
                       <td>{p.duplicateOf ? (replace ? 'reemplaza' : 'ya existe · se omite') : 'nueva'}</td>
                     </tr>
                   ))}
@@ -192,7 +192,7 @@ export function CargaMasiva() {
 
           <footer className="editor__foot">
             <span className="spacer" />
-            <button className="btn btn--ink" disabled={willImport === 0 && preview.newIngredients.length === 0} onClick={doImport}>
+            <button className="btn btn--primary" disabled={willImport === 0 && preview.newIngredients.length === 0} onClick={doImport}>
               Importar {willImport} {willImport === 1 ? 'receta' : 'recetas'}
             </button>
           </footer>

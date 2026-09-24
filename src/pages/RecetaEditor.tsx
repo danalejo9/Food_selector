@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { ArrowLeft, ChevronDown, ChevronUp, Plus, X } from 'lucide-react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useRecetario } from '../data/store'
 import { MEAL_LABEL, MEALS, RecipeSchema, type Ingredient, type Meal, type Recipe } from '../schema'
@@ -152,7 +153,7 @@ export function RecetaEditor() {
     <form className="editor" onSubmit={submit} noValidate>
       <header className="page-head">
         <Link className="link" to="/recetario">
-          ← recetario
+          <ArrowLeft size={16} aria-hidden="true" /> Recetario
         </Link>
         <h1>{existing ? `Editar: ${existing.name}` : 'Nueva receta'}</h1>
       </header>
@@ -188,7 +189,7 @@ export function RecetaEditor() {
           </label>
           <label className="field field--wide">
             <span>Descripción corta</span>
-            <input className="input" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Una línea que dé antojo" />
+            <input className="input" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Una línea que describa el plato" />
           </label>
           <fieldset className="field field--wide">
             <legend>Momento del día</legend>
@@ -258,7 +259,7 @@ export function RecetaEditor() {
             const ing: Ingredient | undefined = row.ingredientId ? ingredientsById.get(row.ingredientId) : undefined
             return (
               <div className="ing-row" key={row.key}>
-                <span className="ing-row__icon">{ing ? <FoodIcon icon={ing.icon} size={24} /> : <span className="shop__dot" />}</span>
+                <span className="ing-row__icon">{ing ? <FoodIcon icon={ing.icon} size={22} /> : null}</span>
                 <span className="ing-row__name">
                   <input
                     className={`input${row.text && !row.ingredientId ? ' is-unknown' : ''}`}
@@ -270,7 +271,7 @@ export function RecetaEditor() {
                   />
                   {row.text.trim() && !row.ingredientId && (
                     <button type="button" className="link small" onClick={() => setCreating({ rowKey: row.key, name: row.text.trim() })}>
-                      crear
+                      Crear
                     </button>
                   )}
                 </span>
@@ -283,13 +284,13 @@ export function RecetaEditor() {
                 </label>
                 <span className="row-tools">
                   <button type="button" onClick={() => setIngs((xs) => move(xs, i, -1))} aria-label="Subir">
-                    ↑
+                    <ChevronUp size={16} />
                   </button>
                   <button type="button" onClick={() => setIngs((xs) => move(xs, i, 1))} aria-label="Bajar">
-                    ↓
+                    <ChevronDown size={16} />
                   </button>
                   <button type="button" onClick={() => setIngs((xs) => xs.filter((x) => x.key !== row.key))} aria-label="Quitar">
-                    ×
+                    <X size={16} />
                   </button>
                 </span>
               </div>
@@ -297,7 +298,7 @@ export function RecetaEditor() {
           })}
         </div>
         <button type="button" className="btn" onClick={() => setIngs((xs) => [...xs, { key: k(), text: '', ingredientId: '', qty: '', unit: '', note: '', optional: false }])}>
-          + Ingrediente
+          <Plus size={16} aria-hidden="true" /> Ingrediente
         </button>
       </section>
 
@@ -328,20 +329,20 @@ export function RecetaEditor() {
               </label>
               <span className="row-tools">
                 <button type="button" onClick={() => setSteps((xs) => move(xs, i, -1))} aria-label="Subir">
-                  ↑
+                  <ChevronUp size={16} />
                 </button>
                 <button type="button" onClick={() => setSteps((xs) => move(xs, i, 1))} aria-label="Bajar">
-                  ↓
+                  <ChevronDown size={16} />
                 </button>
                 <button type="button" onClick={() => setSteps((xs) => xs.filter((x) => x.key !== s.key))} aria-label="Quitar paso">
-                  ×
+                  <X size={16} />
                 </button>
               </span>
             </li>
           ))}
         </ol>
         <button type="button" className="btn" onClick={() => setSteps((xs) => [...xs, { key: k(), text: '', minutes: '' }])}>
-          + Paso
+          <Plus size={16} aria-hidden="true" /> Paso
         </button>
       </section>
 
@@ -371,7 +372,7 @@ export function RecetaEditor() {
         <Link className="btn" to="/recetario">
           Cancelar
         </Link>
-        <button className="btn btn--ink">Guardar receta</button>
+        <button className="btn btn--primary">Guardar receta</button>
       </footer>
 
       {creating && (

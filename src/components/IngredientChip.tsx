@@ -1,5 +1,6 @@
 import type { Ingredient } from '../schema'
 import { useRecetario } from '../data/store'
+import { Check } from 'lucide-react'
 import { FoodIcon } from './FoodIcon'
 
 interface Props {
@@ -23,12 +24,14 @@ export function IngredientChip({ ingredient, selected, onToggle, child, variant 
       onClick={() => onToggle(ingredient.id)}
     >
       <span className="chip__sticker">
-        {photo ? <img src={photo} alt="" /> : <FoodIcon icon={ingredient.icon} size={child ? 26 : 30} />}
+        {photo ? <img src={photo} alt="" /> : <FoodIcon icon={ingredient.icon} size={child ? 22 : 24} />}
       </span>
       <span className="chip__name">{ingredient.name}</span>
-      <span className="chip__mark" aria-hidden="true">
-        {variant === 'staple' ? (selected ? '✓' : 'se acabó') : '✓'}
-      </span>
+      {variant === 'staple' ? (
+        !selected && <span className="chip__note">agotado</span>
+      ) : (
+        selected && <Check className="chip__mark" size={16} strokeWidth={2.25} aria-hidden="true" />
+      )}
     </button>
   )
 }

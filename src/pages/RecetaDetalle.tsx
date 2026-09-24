@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
+import { ArrowLeft, Check, CircleAlert, Heart, Minus, Plus } from 'lucide-react'
 import { RecipeImage } from '../components/RecipeArt'
 import { FoodIcon } from '../components/FoodIcon'
 import { useRecetario } from '../data/store'
@@ -51,7 +52,7 @@ export function RecetaDetalle() {
   return (
     <article className="detail">
       <button className="back link" onClick={() => (window.history.length > 1 ? navigate(-1) : navigate('/'))}>
-        ← volver
+        <ArrowLeft size={16} aria-hidden="true" /> Volver
       </button>
 
       <div className="detail__top">
@@ -83,11 +84,12 @@ export function RecetaDetalle() {
           </dl>
 
           <div className="detail__actions">
-            <Link className="btn btn--ink" to={`/receta/${recipe.id}/cocinar`}>
+            <Link className="btn btn--primary" to={`/receta/${recipe.id}/cocinar`}>
               Cocinar paso a paso
             </Link>
             <button className={`btn${fav ? ' is-on' : ''}`} aria-pressed={fav} onClick={() => p.toggleFavorite(recipe.id)}>
-              {fav ? '♥ Favorita' : '♡ Favorita'}
+              <Heart size={16} fill={fav ? 'currentColor' : 'none'} aria-hidden="true" />
+              Favorita
             </button>
             <button
               className="btn"
@@ -97,7 +99,13 @@ export function RecetaDetalle() {
                 toast.show('Anotado en el historial')
               }}
             >
-              {cookedToday ? '✓ Hecha hoy' : 'La hice hoy'}
+              {cookedToday ? (
+                <>
+                  <Check size={16} aria-hidden="true" /> Hecha hoy
+                </>
+              ) : (
+                'La hice hoy'
+              )}
             </button>
           </div>
           {dates.length > 0 && (
@@ -114,13 +122,11 @@ export function RecetaDetalle() {
             <h2>Ingredientes</h2>
             <div className="stepper" aria-label="Porciones">
               <button onClick={() => setServings((s) => Math.max(1, s - 1))} aria-label="Menos porciones">
-                −
+                <Minus size={16} aria-hidden="true" />
               </button>
-              <span className="mono">
-                {servings} porc.
-              </span>
+              <span className="num">{servings} porc.</span>
               <button onClick={() => setServings((s) => s + 1)} aria-label="Más porciones">
-                +
+                <Plus size={16} aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -141,16 +147,16 @@ export function RecetaDetalle() {
               return (
                 <li key={ri.ingredientId} className={have ? 'have' : ri.optional ? 'opt' : 'miss'}>
                   <span className="ing-list__icon">
-                    <FoodIcon icon={ing?.icon} size={26} />
+                    <FoodIcon icon={ing?.icon} size={22} />
                   </span>
                   <span className="ing-list__name">
                     {ing?.name ?? ri.ingredientId}
                     {ri.note && <span className="muted"> — {ri.note}</span>}
-                    {ri.optional && <span className="tag">opcional</span>}
+                    {ri.optional && <span className="muted"> · opcional</span>}
                   </span>
-                  <span className="ing-list__qty mono">{formatAmount(ri.qty, ri.unit, factor)}</span>
-                  <span className="ing-list__state" aria-label={have ? 'lo tienes' : 'no lo tienes'}>
-                    {have ? '✓' : ri.optional ? '' : '✗'}
+                  <span className="ing-list__qty num">{formatAmount(ri.qty, ri.unit, factor)}</span>
+                  <span className="ing-list__state" aria-label={have ? 'Lo tienes' : ri.optional ? 'Opcional' : 'Falta'}>
+                    {have ? <Check size={18} strokeWidth={2.25} /> : ri.optional ? null : <CircleAlert size={18} strokeWidth={2} />}
                   </span>
                 </li>
               )
@@ -166,20 +172,12 @@ export function RecetaDetalle() {
                 <span className="steps__n">{i + 1}</span>
                 <p>
                   {s.text}
-                  {s.minutes && <span className="mono muted"> · {s.minutes} min</span>}
+                  {s.minutes && <span className="muted num"> · {s.minutes} min</span>}
                 </p>
               </li>
             ))}
           </ol>
-          {recipe.tags.length > 0 && (
-            <p className="tags">
-              {recipe.tags.map((t) => (
-                <span key={t} className="tag">
-                  {t}
-                </span>
-              ))}
-            </p>
-          )}
+          {recipe.tags.length > 0 && <p className="muted small tags">{recipe.tags.join(', ')}</p>}
           <p className="small">
             <Link className="link" to={`/recetario/receta/${recipe.id}`}>
               Editar esta receta

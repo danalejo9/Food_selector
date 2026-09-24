@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { Plus, X } from 'lucide-react'
 import { usageCount, useRecetario } from '../data/store'
 import { CATEGORIES, CATEGORY_LABEL, IngredientSchema, type Category, type Ingredient } from '../schema'
 import { FoodIcon, ICON_KEYS } from '../components/FoodIcon'
@@ -17,9 +18,9 @@ export function IngredientesAdmin() {
     <section>
       <div className="toolbar">
         <input className="input" type="search" placeholder="Buscar ingrediente" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Buscar ingrediente" />
-        <span className="muted mono">{recetario.ingredients.length} ingredientes</span>
-        <button className="btn btn--ink" onClick={() => setEditing('new')}>
-          + Nuevo ingrediente
+        <span className="muted num">{recetario.ingredients.length} ingredientes</span>
+        <button className="btn btn--primary" onClick={() => setEditing('new')}>
+          <Plus size={16} aria-hidden="true" /> Nuevo ingrediente
         </button>
       </div>
       {CATEGORIES.map((cat) => {
@@ -41,9 +42,9 @@ export function IngredientesAdmin() {
                       <span>
                         <b>{i.name}</b>
                         <span className="muted small">
-                          {i.family && `de ${byId.get(i.family)?.name ?? i.family} · `}
-                          {i.pantryStaple && 'básico · '}
-                          {n ? `en ${n} ${n === 1 ? 'receta' : 'recetas'}` : 'sin usar'}
+                          {i.family && `Familia ${byId.get(i.family)?.name ?? i.family} · `}
+                          {i.pantryStaple && 'Básico · '}
+                          {n ? `${n} ${n === 1 ? 'uso' : 'usos'}` : 'Sin usar'}
                         </span>
                       </span>
                     </button>
@@ -55,7 +56,7 @@ export function IngredientesAdmin() {
                         if (confirm(`¿Borrar “${i.name}”?`)) deleteIngredient(i.id)
                       }}
                     >
-                      borrar
+                      Borrar
                     </button>
                   </li>
                 )
@@ -129,8 +130,8 @@ export function IngredientDialog({
       <form onSubmit={save}>
         <header className="dialog__head">
           <h2>{initial ? 'Editar ingrediente' : 'Nuevo ingrediente'}</h2>
-          <button type="button" className="link" onClick={onClose} aria-label="Cerrar">
-            cerrar
+          <button type="button" className="icon-btn" onClick={onClose} aria-label="Cerrar">
+            <X size={20} />
           </button>
         </header>
         <div className="form-grid">
@@ -175,8 +176,8 @@ export function IngredientDialog({
             ))}
           </div>
           <label className="field field--inline">
-            <span>o un emoji</span>
-            <input className="input input--small" value={ICON_KEYS.includes(icon) ? '' : icon} onChange={(e) => setIcon(e.target.value)} maxLength={4} placeholder="🥥" />
+            <span>Otra clave</span>
+            <input className="input input--small" value={ICON_KEYS.includes(icon) ? '' : icon} onChange={(e) => setIcon(e.target.value)} maxLength={4} placeholder="texto" />
           </label>
         </fieldset>
         <div className="field">
@@ -199,7 +200,7 @@ export function IngredientDialog({
           <button type="button" className="btn" onClick={onClose}>
             Cancelar
           </button>
-          <button className="btn btn--ink">Guardar</button>
+          <button className="btn btn--primary">Guardar</button>
         </footer>
       </form>
     </dialog>,

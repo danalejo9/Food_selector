@@ -1,8 +1,10 @@
 import type { ReactNode } from 'react'
 
 /**
- * Set propio de iconos de ingredientes: trazo de tinta + relleno de color,
- * como dibujados en una libreta. Si la clave no existe se usa como emoji.
+ * Set propio de iconos de ingredientes. En la interfaz se usan en versión
+ * lineal (sin rellenos, trazo uniforme); la versión a color solo aparece en
+ * las ilustraciones de platos. Si la clave no existe se muestra el texto tal
+ * cual (p. ej. un emoji que alguien cargó en la plantilla).
  */
 const I: Record<string, ReactNode> = {
   egg: (
@@ -109,7 +111,7 @@ const I: Record<string, ReactNode> = {
   ),
   garlic: (
     <>
-      <path d="M16 5c-2 4-10 7-10 14 0 5 4 8 10 8s10-3 10-8c0-7-8-10-10-14Z" fill="#F4EEE3" />
+      <path d="M16 5c-2 4-10 7-10 14 0 5 4 8 10 8s10-3 10-8c0-7-8-10-10-14Z" fill="#EEF0EC" />
       <path d="M16 5V2M16 12v15M11 15c-1 3-1 8 1 12M21 15c1 3 1 8-1 12" />
     </>
   ),
@@ -261,15 +263,15 @@ const I: Record<string, ReactNode> = {
   ),
   jar: (
     <>
-      <path d="M8 10h16v16c0 2-1 3-3 3H11c-2 0-3-1-3-3Z" fill="#F4EEE3" />
-      <path d="M9 5h14v5H9z" fill="#C8412B" />
+      <path d="M8 10h16v16c0 2-1 3-3 3H11c-2 0-3-1-3-3Z" fill="#EEF0EC" />
+      <path d="M9 5h14v5H9z" fill="#8E4430" />
       <path d="M12 16h8v6h-8z" />
     </>
   ),
   honey: (
     <>
       <path d="M7 12h18v13c0 2-2 4-4 4H11c-2 0-4-2-4-4Z" fill="#E6A83A" />
-      <path d="M8 7h16v5H8z" fill="#F4EEE3" />
+      <path d="M8 7h16v5H8z" fill="#EEF0EC" />
       <path d="M12 12v4c0 1 1 1 1 0M19 12v6c0 1 1 1 1 0" />
     </>
   ),
@@ -291,7 +293,17 @@ const I: Record<string, ReactNode> = {
 
 export const ICON_KEYS = Object.keys(I)
 
-export function FoodIcon({ icon, size = 32, title }: { icon?: string; size?: number; title?: string }) {
+export function FoodIcon({
+  icon,
+  size = 32,
+  title,
+  variant = 'line',
+}: {
+  icon?: string
+  size?: number
+  title?: string
+  variant?: 'line' | 'color'
+}) {
   const node = icon ? I[icon] : undefined
   if (!node) {
     return (
@@ -302,13 +314,13 @@ export function FoodIcon({ icon, size = 32, title }: { icon?: string; size?: num
   }
   return (
     <svg
-      className="food-icon"
+      className={`food-icon food-icon--${variant}`}
       width={size}
       height={size}
       viewBox="0 0 32 32"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.4}
+      strokeWidth={variant === 'line' ? 1.75 : 1.4}
       strokeLinecap="round"
       strokeLinejoin="round"
       role="img"

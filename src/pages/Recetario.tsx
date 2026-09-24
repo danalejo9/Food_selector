@@ -1,4 +1,5 @@
 import { Link, NavLink, useParams } from 'react-router-dom'
+import { Plus } from 'lucide-react'
 import { useRecetario } from '../data/store'
 import { RecipeImage } from '../components/RecipeArt'
 import { MEAL_LABEL } from '../schema'
@@ -36,9 +37,9 @@ function RecetasAdmin() {
     <section>
       <div className="toolbar">
         <input className="input" type="search" placeholder="Buscar receta" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Buscar receta" />
-        <span className="muted mono">{recetario.recipes.length} recetas</span>
-        <Link className="btn btn--ink" to="/recetario/receta/nueva">
-          + Nueva receta
+        <span className="muted num">{recetario.recipes.length} recetas</span>
+        <Link className="btn btn--primary" to="/recetario/receta/nueva">
+          <Plus size={16} aria-hidden="true" /> Nueva receta
         </Link>
       </div>
       <ul className="admin-list">
@@ -58,7 +59,7 @@ function RecetasAdmin() {
             </Link>
             <div className="admin-list__actions">
               <Link className="link" to={`/receta/${r.id}`}>
-                ver
+                Ver
               </Link>
               <button
                 className="link danger"
@@ -66,7 +67,7 @@ function RecetasAdmin() {
                   if (confirm(`¿Borrar “${r.name}”?`)) deleteRecipe(r.id)
                 }}
               >
-                borrar
+                Borrar
               </button>
             </div>
           </li>

@@ -18,8 +18,8 @@ export default defineConfig({
         short_name: 'La Nevera',
         description: 'Elige lo que tienes y mira qué puedes cocinar.',
         lang: 'es',
-        theme_color: '#F4EEE3',
-        background_color: '#F4EEE3',
+        theme_color: '#EEF0EC',
+        background_color: '#EEF0EC',
         display: 'standalone',
         icons: [
           { src: 'icon-192.png', sizes: '192x192', type: 'image/png' },

@@ -11,6 +11,15 @@ Eliges lo que tienes en la nevera y la página te dice qué recetas puedes prepa
 - **Recetario**: crear y editar recetas e ingredientes, y **carga masiva con plantilla Excel**.
 - Se instala en el celular (PWA) y funciona sin internet.
 
+## Diseño
+
+Sigue los lineamientos gráficos de Daniel: paleta niebla / asfalto / musgo (acción y selección) /
+señal (estados: falta, pendiente), una sola familia tipográfica (Schibsted Grotesk, autoalojada),
+retícula de 12 columnas, iconos lineales (Lucide para la interfaz, set propio para ingredientes) y
+solo modo claro; el modo cocinar usa fondo oscuro por ser una vista de concentración.
+Las ilustraciones de platos (mantel + plato) son **temporales**: se reemplazan subiendo una foto
+real desde el editor de cada receta.
+
 ## Correrla
 
 ```bash

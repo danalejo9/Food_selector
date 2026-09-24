@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { ArrowLeft, Check, Timer as TimerIcon } from 'lucide-react'
 import { useRecetario } from '../data/store'
 import { usePersonal } from '../data/personal'
 
@@ -36,16 +37,16 @@ function Timer({ minutes }: { minutes: number }) {
   if (left === null)
     return (
       <button className="btn" onClick={() => setLeft(minutes * 60)}>
-        Iniciar temporizador · {minutes} min
+        <TimerIcon size={18} aria-hidden="true" /> Temporizador · {minutes} min
       </button>
     )
   const mm = String(Math.floor(left / 60)).padStart(2, '0')
   const ss = String(left % 60).padStart(2, '0')
   return (
     <div className={`timer${left === 0 ? ' is-done' : ''}`} role="timer" aria-live="polite">
-      <span className="mono">{left === 0 ? '¡Listo!' : `${mm}:${ss}`}</span>
+      <span className="num">{left === 0 ? 'Tiempo cumplido' : `${mm}:${ss}`}</span>
       <button className="link" onClick={() => setLeft(null)}>
-        {left === 0 ? 'cerrar' : 'cancelar'}
+        {left === 0 ? 'Cerrar' : 'Cancelar'}
       </button>
     </div>
   )
@@ -78,10 +79,10 @@ export function ModoCocinar() {
     <div className="cook">
       <header className="cook__head">
         <Link className="link" to={`/receta/${recipe.id}`}>
-          ← salir
+          <ArrowLeft size={16} aria-hidden="true" /> Salir
         </Link>
         <span className="cook__name">{recipe.name}</span>
-        <span className="mono">
+        <span className="num">
           {i + 1}/{recipe.steps.length}
         </span>
       </header>
@@ -91,7 +92,9 @@ export function ModoCocinar() {
         ))}
       </div>
       <main className="cook__step" key={i}>
-        <span className="cook__n">{i + 1}</span>
+        <span className="cook__n">
+          Paso {i + 1} de {recipe.steps.length}
+        </span>
         <p>{step.text}</p>
         {step.minutes && <Timer key={i} minutes={step.minutes} />}
       </main>
@@ -101,17 +104,23 @@ export function ModoCocinar() {
         </button>
         {last ? (
           <button
-            className="btn btn--ink"
+            className={`btn btn--primary${done ? ' is-done' : ''}`}
             disabled={done}
             onClick={() => {
               markCooked(recipe.id)
               setDone(true)
             }}
           >
-            {done ? '¡Buen provecho!' : 'Terminé · anotar'}
+            {done ? (
+              <>
+                <Check size={18} aria-hidden="true" /> Anotada
+              </>
+            ) : (
+              'Terminé'
+            )}
           </button>
         ) : (
-          <button className="btn btn--ink" onClick={() => setI(i + 1)}>
+          <button className="btn btn--primary" onClick={() => setI(i + 1)}>
             Siguiente
           </button>
         )}

@@ -26,7 +26,7 @@ export function DraftBar() {
         </b>{' '}
         Descarga el recetario y reemplaza el del repo para que quede guardado.{' '}
         <button className="link" onClick={() => setHelp((h) => !h)} aria-expanded={help}>
-          ¿cómo?
+          Cómo guardarlo
         </button>
         {help && (
           <ol className="draftbar__help">
@@ -42,7 +42,7 @@ export function DraftBar() {
         )}
       </div>
       <div className="draftbar__actions">
-        <button className="btn btn--ink" onClick={download} disabled={busy}>
+        <button className="btn btn--primary" onClick={download} disabled={busy}>
           {busy ? 'Preparando…' : 'Descargar recetario'}
         </button>
         <button

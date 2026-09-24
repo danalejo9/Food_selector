@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Heart } from 'lucide-react'
 import type { MatchResult } from '../lib/match'
 import { formatMinutes, totalMinutes } from '../lib/units'
 import { cookedLabel, lastCooked, usePersonal } from '../data/personal'
@@ -16,7 +17,7 @@ export function RecipeCard({ result, onAddMissing }: { result: MatchResult; onAd
       <Link to={`/receta/${recipe.id}`} className="card__link">
         <div className="card__img">
           <RecipeImage recipe={recipe} />
-          {status === 'ready' && <span className="stamp stamp--ready">Lista</span>}
+          {status === 'ready' && <span className="state state--ready">Lista</span>}
         </div>
         <div className="card__body">
           <p className="card__meals">{recipe.meals.map((m) => MEAL_LABEL[m]).join(' · ')}</p>
@@ -24,18 +25,19 @@ export function RecipeCard({ result, onAddMissing }: { result: MatchResult; onAd
           <p className="card__meta">
             <span>{formatMinutes(totalMinutes(recipe))}</span>
             <span>{recipe.servings} porc.</span>
-            {cooked && <span>{cooked}</span>}
+            {cooked && <span>{cooked.replace('hecha ', 'Hecha ')}</span>}
           </p>
         </div>
       </Link>
       {status !== 'ready' && (
         <div className="card__missing">
-          <span>
-            <b>Falta:</b> {missing.map((m) => m.name.toLowerCase()).join(', ')}
+          <span className="card__missing-text">
+            <span className="dot dot--senal" aria-hidden="true" />
+            Falta {missing.map((m) => m.name.toLowerCase()).join(', ')}
           </span>
           {onAddMissing && status === 'almost' && (
-            <button className="link" onClick={() => onAddMissing(result)} title="Agregar a la lista de compras">
-              + a compras
+            <button className="link" onClick={() => onAddMissing(result)}>
+              Agregar a compras
             </button>
           )}
         </div>
@@ -46,9 +48,7 @@ export function RecipeCard({ result, onAddMissing }: { result: MatchResult; onAd
         aria-label={fav ? 'Quitar de favoritas' : 'Marcar como favorita'}
         onClick={() => toggleFavorite(recipe.id)}
       >
-        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-          <path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z" />
-        </svg>
+        <Heart size={18} strokeWidth={2} fill={fav ? 'currentColor' : 'none'} aria-hidden="true" />
       </button>
     </article>
   )

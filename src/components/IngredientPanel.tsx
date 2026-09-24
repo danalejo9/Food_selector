@@ -3,6 +3,7 @@ import { CATEGORIES, CATEGORY_LABEL, type Ingredient } from '../schema'
 import { useRecetario } from '../data/store'
 import { usePersonal } from '../data/personal'
 import { matchesQuery } from '../lib/normalize'
+import { Search } from 'lucide-react'
 import { IngredientChip } from './IngredientChip'
 
 interface Group {
@@ -57,21 +58,22 @@ export function IngredientPanel({ onToggle }: { onToggle: (id: string) => void }
         </h2>
         {fridge.length > 0 && (
           <button className="link" onClick={clearFridge}>
-            vaciar
+            Vaciar
           </button>
         )}
       </div>
       <p className="panel__summary" aria-live="polite">
-        {fridge.length === 0 ? 'Toca lo que tengas a mano.' : selectedNames.join(', ')}
+        {fridge.length === 0 ? 'Sin ingredientes seleccionados.' : selectedNames.join(', ')}
       </p>
       <label className="search">
         <span className="visually-hidden">Buscar ingrediente</span>
-        <input type="search" placeholder="Buscar: arándanos, queso…" value={query} onChange={(e) => setQuery(e.target.value)} />
+        <Search size={18} aria-hidden="true" />
+        <input type="search" placeholder="Buscar ingrediente" value={query} onChange={(e) => setQuery(e.target.value)} />
       </label>
 
       {!query && frequent.length > 0 && (
         <section className="panel__section">
-          <h3 className="kicker">Los de siempre</h3>
+          <h3 className="kicker">Más usados</h3>
           <div className="chips">
             {frequent.map((i) => (
               <IngredientChip key={i.id} ingredient={i} selected={fridgeSet.has(i.id)} onToggle={onToggle} />
@@ -105,12 +107,12 @@ export function IngredientPanel({ onToggle }: { onToggle: (id: string) => void }
           </section>
         )
       })}
-      {query && shown.length === 0 && <p className="muted">Nada con “{query}”. Puedes crearlo en el Recetario.</p>}
+      {query && shown.length === 0 && <p className="muted">No hay ingredientes con “{query}”. Se crean en Recetario → Ingredientes.</p>}
 
       {!query && staples.length > 0 && (
         <section className="panel__section panel__section--staples">
           <h3 className="kicker">Siempre tengo</h3>
-          <p className="muted small">Se cuentan solos. Toca uno si se acabó.</p>
+          <p className="muted small">Se cuentan como disponibles. Toca uno para marcarlo agotado.</p>
           <div className="chips">
             {staples.map((i) => (
               <IngredientChip key={i.id} ingredient={i} selected={!out.has(i.id)} onToggle={toggleStaple} variant="staple" />
