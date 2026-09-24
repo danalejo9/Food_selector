@@ -45,6 +45,22 @@ en el Recetario). Para guardarlos:
 Lo personal (qué hay hoy en la nevera, favoritas, historial, lista de compras) se queda en cada
 dispositivo y no va al repo.
 
+### Modo editor
+
+En la página publicada el Recetario es **solo de consulta**: se ven recetas e ingredientes, pero no
+hay botones para crear, editar, borrar ni cargar en masa, y se ignora cualquier borrador local.
+Con `npm run dev` en tu computador siempre puedes editar.
+
+Para editar desde la página publicada (por ejemplo, en el celular):
+
+1. En el computador, define la clave una sola vez: `npm run clave -- "tu clave"`.
+   Solo se guarda su huella (SHA-256) en `src/editorKey.ts`, nunca la clave.
+2. Haz commit y push de ese archivo.
+3. En el navegador donde quieras editar, abre `…/Food_selector/#/editor` y escribe la clave.
+   Ese navegador queda en modo editor hasta que pulses **Salir del modo editor** en el Recetario.
+
+Esto oculta la edición a los visitantes; la protección real es que solo tú puedes subir cambios al repo.
+
 ### Carga masiva
 
 Recetario → **Carga masiva** → *Descargar plantilla .xlsx*. Una fila por receta:

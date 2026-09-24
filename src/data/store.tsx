@@ -39,8 +39,10 @@ interface Store {
 
 const Ctx = createContext<Store | null>(null)
 
-export function RecetarioProvider({ base, children }: { base: Recetario; children: ReactNode }) {
-  const [draft, setDraft] = useState<Draft | null>(null)
+export function RecetarioProvider({ base, canEdit, children }: { base: Recetario; canEdit: boolean; children: ReactNode }) {
+  const [storedDraft, setDraft] = useState<Draft | null>(null)
+  // en modo consulta se ignora cualquier borrador local: siempre las recetas del repo
+  const draft = canEdit ? storedDraft : null
   const [ready, setReady] = useState(false)
   const urls = useRef(new Map<string, string>())
 
@@ -64,11 +66,12 @@ export function RecetarioProvider({ base, children }: { base: Recetario; childre
 
   const update = useCallback(
     (fn: (r: Recetario) => Recetario, photo?: { path: string; blob: Blob }, changes = 1) => {
+      if (!canEdit) return
       const cur = draft ?? { recetario: base, photos: {}, changes: 0 }
       const photos = photo ? { ...cur.photos, [photo.path]: photo.blob } : cur.photos
       persist({ recetario: fn(cur.recetario), photos, changes: cur.changes + changes })
     },
-    [draft, base, persist],
+    [draft, base, persist, canEdit],
   )
 
   const store = useMemo<Store>(
@@ -116,6 +119,7 @@ export function RecetarioProvider({ base, children }: { base: Recetario; childre
             .map((x) => (x.family === id ? { ...x, family: undefined } : x)),
         })),
       commit: (next, photos = {}, changes = 1) => {
+        if (!canEdit) return
         const cur = draft ?? { recetario: base, photos: {}, changes: 0 }
         persist({ recetario: next, photos: { ...cur.photos, ...photos }, changes: cur.changes + changes })
       },
@@ -125,7 +129,7 @@ export function RecetarioProvider({ base, children }: { base: Recetario; childre
         persist(null)
       },
     }),
-    [recetario, draft, ready, update, persist, base],
+    [recetario, draft, ready, update, persist, base, canEdit],
   )
 
   return <Ctx.Provider value={store}>{children}</Ctx.Provider>

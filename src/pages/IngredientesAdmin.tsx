@@ -6,9 +6,11 @@ import { CATEGORIES, CATEGORY_LABEL, IngredientSchema, type Category, type Ingre
 import { FoodIcon, ICON_KEYS } from '../components/FoodIcon'
 import { PhotoInput } from '../components/PhotoInput'
 import { matchesQuery, uniqueId } from '../lib/normalize'
+import { useEditor } from '../data/editor'
 
 export function IngredientesAdmin() {
   const { recetario, deleteIngredient, photoUrl } = useRecetario()
+  const { canEdit } = useEditor()
   const [editing, setEditing] = useState<Ingredient | 'new' | null>(null)
   const [q, setQ] = useState('')
   const usage = useMemo(() => usageCount(recetario), [recetario])
@@ -19,9 +21,11 @@ export function IngredientesAdmin() {
       <div className="toolbar">
         <input className="input" type="search" placeholder="Buscar ingrediente" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Buscar ingrediente" />
         <span className="muted num">{recetario.ingredients.length} ingredientes</span>
-        <button className="btn btn--primary" onClick={() => setEditing('new')}>
-          <Plus size={16} aria-hidden="true" /> Nuevo ingrediente
-        </button>
+        {canEdit && (
+          <button className="btn btn--primary" onClick={() => setEditing('new')}>
+            <Plus size={16} aria-hidden="true" /> Nuevo ingrediente
+          </button>
+        )}
       </div>
       {CATEGORIES.map((cat) => {
         const list = recetario.ingredients
@@ -35,18 +39,29 @@ export function IngredientesAdmin() {
               {list.map((i) => {
                 const n = usage.get(i.id) ?? 0
                 const photo = photoUrl(i.photo)
+                const content = (
+                  <>
+                    <span className="chip__sticker">{photo ? <img src={photo} alt="" /> : <FoodIcon icon={i.icon} size={28} />}</span>
+                    <span>
+                      <b>{i.name}</b>
+                      <span className="muted small">
+                        {i.family && `Familia ${byId.get(i.family)?.name ?? i.family} · `}
+                        {i.pantryStaple && 'Básico · '}
+                        {n ? `${n} ${n === 1 ? 'uso' : 'usos'}` : 'Sin usar'}
+                      </span>
+                    </span>
+                  </>
+                )
+                if (!canEdit)
+                  return (
+                    <li key={i.id}>
+                      <div className="ing-admin__main">{content}</div>
+                    </li>
+                  )
                 return (
                   <li key={i.id}>
                     <button className="ing-admin__main" onClick={() => setEditing(i)}>
-                      <span className="chip__sticker">{photo ? <img src={photo} alt="" /> : <FoodIcon icon={i.icon} size={28} />}</span>
-                      <span>
-                        <b>{i.name}</b>
-                        <span className="muted small">
-                          {i.family && `Familia ${byId.get(i.family)?.name ?? i.family} · `}
-                          {i.pantryStaple && 'Básico · '}
-                          {n ? `${n} ${n === 1 ? 'uso' : 'usos'}` : 'Sin usar'}
-                        </span>
-                      </span>
+                      {content}
                     </button>
                     <button
                       className="link danger"
@@ -65,7 +80,7 @@ export function IngredientesAdmin() {
           </div>
         )
       })}
-      {editing && <IngredientDialog initial={editing === 'new' ? null : editing} onClose={() => setEditing(null)} />}
+      {canEdit && editing && <IngredientDialog initial={editing === 'new' ? null : editing} onClose={() => setEditing(null)} />}
     </section>
   )
 }

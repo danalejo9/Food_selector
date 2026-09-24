@@ -8,29 +8,48 @@ import { IngredientesAdmin } from './IngredientesAdmin'
 import { CargaMasiva } from './CargaMasiva'
 import { useState } from 'react'
 import { matchesQuery } from '../lib/normalize'
+import { useEditor } from '../data/editor'
 
 export function Recetario() {
   const { tab = 'recetas' } = useParams()
+  const { canEdit, lock } = useEditor()
+  const showBulk = canEdit && tab === 'plantilla'
   return (
     <div className="admin">
       <header className="page-head">
-        <h1>Recetario</h1>
-        <p className="muted">Aquí se configuran las recetas y los ingredientes que ves en la cocina.</p>
+        <div className="page-head__row">
+          <h1>Recetario</h1>
+          {canEdit ? (
+            !import.meta.env.DEV && (
+              <button className="link" onClick={lock}>
+                Salir del modo editor
+              </button>
+            )
+          ) : (
+            <span className="mode-label">Solo consulta</span>
+          )}
+        </div>
+        <p className="muted">
+          {canEdit
+            ? 'Aquí se configuran las recetas y los ingredientes que ves en la cocina.'
+            : 'Todas las recetas e ingredientes disponibles en la cocina.'}
+        </p>
       </header>
       <nav className="subnav" aria-label="Secciones del recetario">
         <NavLink to="/recetario" end className={() => (tab === 'recetas' ? 'active' : '')}>
           Recetas
         </NavLink>
         <NavLink to="/recetario/ingredientes">Ingredientes</NavLink>
-        <NavLink to="/recetario/plantilla">Carga masiva</NavLink>
+        {canEdit && <NavLink to="/recetario/plantilla">Carga masiva</NavLink>}
       </nav>
-      {tab === 'ingredientes' ? <IngredientesAdmin /> : tab === 'plantilla' ? <CargaMasiva /> : <RecetasAdmin />}
+      {tab === 'ingredientes' ? <IngredientesAdmin /> : showBulk ? <CargaMasiva /> : <RecetasAdmin />}
     </div>
   )
 }
 
 function RecetasAdmin() {
   const { recetario, deleteRecipe } = useRecetario()
+  const { canEdit } = useEditor()
   const [q, setQ] = useState('')
   const list = [...recetario.recipes].filter((r) => matchesQuery(r.name, q)).sort((a, b) => a.name.localeCompare(b.name, 'es'))
   return (
@@ -38,14 +57,20 @@ function RecetasAdmin() {
       <div className="toolbar">
         <input className="input" type="search" placeholder="Buscar receta" value={q} onChange={(e) => setQ(e.target.value)} aria-label="Buscar receta" />
         <span className="muted num">{recetario.recipes.length} recetas</span>
-        <Link className="btn btn--primary" to="/recetario/receta/nueva">
-          <Plus size={16} aria-hidden="true" /> Nueva receta
-        </Link>
+        {canEdit && (
+          <Link className="btn btn--primary" to="/recetario/receta/nueva">
+            <Plus size={16} aria-hidden="true" /> Nueva receta
+          </Link>
+        )}
       </div>
       <ul className="admin-list">
         {list.map((r) => (
           <li key={r.id}>
-            <Link to={`/recetario/receta/${r.id}`} className="admin-list__main">
+            <Link
+              to={canEdit ? `/recetario/receta/${r.id}` : `/receta/${r.id}`}
+              state={canEdit ? undefined : { back: true }}
+              className="admin-list__main"
+            >
               <span className="admin-list__thumb">
                 <RecipeImage recipe={r} />
               </span>
@@ -57,7 +82,8 @@ function RecetasAdmin() {
                 </span>
               </span>
             </Link>
-            <div className="admin-list__actions">
+            {canEdit && (
+              <div className="admin-list__actions">
               <Link className="link" to={`/receta/${r.id}`} state={{ back: true }}>
                 Ver
               </Link>
@@ -70,6 +96,7 @@ function RecetasAdmin() {
                 Borrar
               </button>
             </div>
+            )}
           </li>
         ))}
       </ul>
