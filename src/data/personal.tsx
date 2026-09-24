@@ -70,6 +70,15 @@ export function PersonalProvider({ children }: { children: ReactNode }) {
     }
   }, [state])
 
+  // si la app está abierta en otra pestaña, mantenerlas iguales
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === KEY) setState(load())
+    }
+    window.addEventListener('storage', onStorage)
+    return () => window.removeEventListener('storage', onStorage)
+  }, [])
+
   const toggleFridge = useCallback(
     (id: string) =>
       setState((s) => {

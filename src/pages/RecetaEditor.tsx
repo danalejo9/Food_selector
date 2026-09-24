@@ -265,7 +265,7 @@ export function RecetaEditor() {
                     list="ing-names"
                     value={row.text}
                     onChange={(e) => onIngText(row, e.target.value)}
-                    placeholder="harina"
+                    placeholder={i === 0 ? 'harina' : undefined}
                     aria-label="Ingrediente"
                   />
                   {row.text.trim() && !row.ingredientId && (
@@ -274,9 +274,9 @@ export function RecetaEditor() {
                     </button>
                   )}
                 </span>
-                <input className="input" value={row.qty} onChange={(e) => setIng(row.key, { qty: e.target.value })} placeholder="1 1/2" aria-label="Cantidad" inputMode="decimal" />
-                <input className="input" list="units" value={row.unit} onChange={(e) => setIng(row.key, { unit: e.target.value })} placeholder="taza" aria-label="Unidad" />
-                <input className="input" value={row.note} onChange={(e) => setIng(row.key, { note: e.target.value })} placeholder="picado" aria-label="Nota" />
+                <input className="input" value={row.qty} onChange={(e) => setIng(row.key, { qty: e.target.value })} placeholder={i === 0 ? '1 1/2' : undefined} aria-label="Cantidad" inputMode="decimal" />
+                <input className="input" list="units" value={row.unit} onChange={(e) => setIng(row.key, { unit: e.target.value })} placeholder={i === 0 ? 'taza' : undefined} aria-label="Unidad" />
+                <input className="input" value={row.note} onChange={(e) => setIng(row.key, { note: e.target.value })} placeholder={i === 0 ? 'picado' : undefined} aria-label="Nota" />
                 <label className="ing-row__opt">
                   <input type="checkbox" checked={row.optional} onChange={(e) => setIng(row.key, { optional: e.target.checked })} />
                   <span className="visually-hidden">Opcional</span>

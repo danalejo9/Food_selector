@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { usageCount, useRecetario } from '../data/store'
 import { CATEGORIES, CATEGORY_LABEL, IngredientSchema, type Category, type Ingredient } from '../schema'
 import { FoodIcon, ICON_KEYS } from '../components/FoodIcon'
@@ -98,6 +99,8 @@ export function IngredientDialog({
 
   const save = (e: React.FormEvent) => {
     e.preventDefault()
+    // el diálogo puede abrirse desde el editor de recetas: que no envíe ese formulario
+    e.stopPropagation()
     const clean = name.trim()
     if (!clean) return setError('Ponle un nombre.')
     const dup = recetario.ingredients.find((i) => i.name.toLowerCase() === clean.toLowerCase() && i.id !== initial?.id)
@@ -121,7 +124,7 @@ export function IngredientDialog({
 
   const currentPhoto = photo?.url ?? (keepPhoto ? photoUrl(initial?.photo) : undefined)
 
-  return (
+  return createPortal(
     <dialog ref={ref} className="dialog" onClose={onClose} onCancel={onClose}>
       <form onSubmit={save}>
         <header className="dialog__head">
@@ -199,6 +202,7 @@ export function IngredientDialog({
           <button className="btn btn--ink">Guardar</button>
         </footer>
       </form>
-    </dialog>
+    </dialog>,
+    document.body,
   )
 }

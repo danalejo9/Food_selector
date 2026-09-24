@@ -325,9 +325,8 @@ textarea.input { resize: vertical; line-height: 1.45; }
   border-radius: var(--radius);
   background: var(--paper-2);
 }
-.card__img > * { width: 100%; height: 100%; }
-.card__link:hover .card__img > * { transform: scale(1.03); }
-.card__img > * { transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.card__img > :is(.recipe-art, .recipe-photo) { width: 100%; height: 100%; transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.card__link:hover .card__img > :is(.recipe-art, .recipe-photo) { transform: scale(1.03); }
 .card__body { padding: 10px 2px 0; }
 .card__meals { font: 500 11px var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
 .card__title { margin-top: 3px; font-size: 21px; line-height: 1.12; }
