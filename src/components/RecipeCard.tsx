@@ -13,7 +13,7 @@ export function RecipeCard({ result, onAddMissing }: { result: MatchResult; onAd
   const cooked = cookedLabel(lastCooked(history, recipe.id))
 
   return (
-    <article className={`card card--${status}`} style={{ viewTransitionName: `r-${recipe.id}` }}>
+    <article className={`card card--${status}`}>
       <Link to={`/receta/${recipe.id}`} state={{ back: true }} className="card__link">
         <div className="card__img">
           <RecipeImage recipe={recipe} />

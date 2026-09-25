@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { parseYouTube } from './lib/youtube'
 
 export const MEALS = ['desayuno', 'almuerzo', 'once', 'cena', 'entrecomidas'] as const
 export const MEAL_LABEL: Record<Meal, string> = {
@@ -45,6 +46,11 @@ export const RecipeIngredientSchema = z.object({
 export const StepSchema = z.object({
   text: z.string().min(1),
   minutes: z.number().positive().optional(),
+  /** enlace de YouTube (normal o Short) que se ve en el modo cocinar. */
+  video: z
+    .string()
+    .refine((v) => parseYouTube(v) !== null, 'el video debe ser un enlace de YouTube')
+    .optional(),
 })
 
 export const RecipeSchema = z.object({

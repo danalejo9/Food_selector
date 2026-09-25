@@ -36,6 +36,29 @@ describe('parseBulk', () => {
     expect(RecetarioSchema.safeParse(next).success).toBe(true)
   })
 
+  it('lee el video y los minutos de un paso', () => {
+    const p = parseBulk(recetario, [
+      {
+        nombre: 'Prueba video',
+        momentos: 'cena',
+        ingredientes: 'huevo 1',
+        pasos: '1. Batir (2 min) [video: https://youtu.be/dQw4w9WgXcQ]\n2. Servir [video: youtube.com/shorts/dQw4w9WgXcQ] (1 min)\n3. Comer',
+      },
+    ])
+    expect(p.errors).toEqual([])
+    expect(p.recipes[0].recipe.steps).toEqual([
+      { text: 'Batir', minutes: 2, video: 'https://youtu.be/dQw4w9WgXcQ' },
+      { text: 'Servir', minutes: 1, video: 'youtube.com/shorts/dQw4w9WgXcQ' },
+      { text: 'Comer' },
+    ])
+  })
+
+  it('rechaza un video que no es de YouTube', () => {
+    const p = parseBulk(recetario, [{ nombre: 'Mal video', momentos: 'cena', ingredientes: 'huevo 1', pasos: 'Batir [video: https://vimeo.com/1]' }])
+    expect(p.recipes).toHaveLength(0)
+    expect(p.errors[0].messages.join(' ')).toMatch(/YouTube/)
+  })
+
   it('reporta errores por fila', () => {
     const p = parseBulk(recetario, [{ nombre: 'Algo', momentos: 'almuerso', ingredientes: 'huevo 1', pasos: 'x', dificultad: '7' }])
     expect(p.recipes).toHaveLength(0)

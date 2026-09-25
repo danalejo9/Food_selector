@@ -20,7 +20,7 @@ const HEAD: Record<string, { label: string; width: number; note: string }> = {
     width: 60,
     note: 'Separados por punto y coma. Cada uno: nombre cantidad unidad. Ej.: harina 1 1/2 taza; huevos 2; miel (opcional); sal al gusto. Una nota va después de una coma: tomate 1, picado.',
   },
-  pasos: { label: 'pasos', width: 70, note: 'Un paso por línea (Alt+Enter) o separados por |. Agrega (10 min) al final de un paso para el temporizador.' },
+  pasos: { label: 'pasos', width: 70, note: 'Un paso por línea (Alt+Enter) o separados por |. Agrega (10 min) al final de un paso para el temporizador y [video: enlace de YouTube] para mostrar un video en el modo cocinar.' },
   etiquetas: { label: 'etiquetas', width: 18, note: 'Opcional, separadas por coma: rápida, vegetariana…' },
   foto: { label: 'foto', width: 28, note: 'Opcional: enlace a una imagen o ruta fotos/recetas/archivo.webp.' },
 }
