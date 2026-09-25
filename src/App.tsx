@@ -10,6 +10,7 @@ import { Recetario } from './pages/Recetario'
 import { RecetaEditor } from './pages/RecetaEditor'
 import { DraftBar } from './components/DraftBar'
 import { Footer } from './components/Footer'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { EditorProvider, useEditor } from './data/editor'
 import { AccesoEditor } from './pages/AccesoEditor'
 
@@ -49,9 +50,11 @@ function Shell() {
 
   if (cooking)
     return (
-      <Routes>
-        <Route path="/receta/:id/cocinar" element={<ModoCocinar />} />
-      </Routes>
+      <ErrorBoundary key={pathname}>
+        <Routes>
+          <Route path="/receta/:id/cocinar" element={<ModoCocinar />} />
+        </Routes>
+      </ErrorBoundary>
     )
 
   return (
@@ -59,31 +62,33 @@ function Shell() {
       <Masthead />
       {canEdit && pathname.startsWith('/recetario') && <DraftBar />}
       <main className="main">
-        <Routes>
-          <Route path="/" element={<Cocina />} />
-          <Route path="/receta/:id" element={<RecetaDetalle />} />
-          <Route path="/compras" element={<ListaCompras />} />
-          <Route path="/recetario" element={<Recetario />} />
-          <Route path="/recetario/:tab" element={<Recetario />} />
-          <Route
-            path="/recetario/receta/nueva"
-            element={
-              <SoloEditor>
-                <RecetaEditor />
-              </SoloEditor>
-            }
-          />
-          <Route
-            path="/recetario/receta/:id"
-            element={
-              <SoloEditor>
-                <RecetaEditor />
-              </SoloEditor>
-            }
-          />
-          <Route path="/editor" element={<AccesoEditor />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <ErrorBoundary key={pathname}>
+          <Routes>
+            <Route path="/" element={<Cocina />} />
+            <Route path="/receta/:id" element={<RecetaDetalle />} />
+            <Route path="/compras" element={<ListaCompras />} />
+            <Route path="/recetario" element={<Recetario />} />
+            <Route path="/recetario/:tab" element={<Recetario />} />
+            <Route
+              path="/recetario/receta/nueva"
+              element={
+                <SoloEditor>
+                  <RecetaEditor />
+                </SoloEditor>
+              }
+            />
+            <Route
+              path="/recetario/receta/:id"
+              element={
+                <SoloEditor>
+                  <RecetaEditor />
+                </SoloEditor>
+              }
+            />
+            <Route path="/editor" element={<AccesoEditor />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ErrorBoundary>
       </main>
       <Footer />
     </div>
