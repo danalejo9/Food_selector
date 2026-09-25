@@ -729,6 +729,13 @@ textarea.input { resize: vertical; line-height: 1.5; }
 .install__steps h3 { font-size: var(--t-16); margin-bottom: var(--s1); }
 .install__steps ol { margin: 0; padding-left: 20px; display: grid; gap: var(--s-1); font-size: var(--t-14); }
 
+/* pantalla de error: nunca dejar la página vacía */
+.crash { max-width: 640px; margin: 0 auto; padding: var(--s6) var(--gutter); }
+.crash h1 { font-size: var(--t-28); }
+.crash p { margin-top: var(--s1); }
+.crash__actions { display: flex; flex-wrap: wrap; gap: var(--s1); margin-top: var(--s3); }
+.crash__detail { margin-top: var(--s3); padding: 12px var(--s2); border-radius: var(--r-control); background: var(--campo); font-size: 13px; white-space: pre-wrap; word-break: break-word; }
+
 /* ——— tablet ——— */
 @media (max-width: 1100px) {
   :root { --gutter: 24px; }
