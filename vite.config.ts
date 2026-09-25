@@ -12,6 +12,8 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      // el registro lo hace src/main.tsx para recargar una vez cuando hay versión nueva
+      injectRegister: false,
       includeAssets: ['icon.svg'],
       manifest: {
         name: 'La Nevera — ¿qué cocino hoy?',

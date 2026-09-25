@@ -124,14 +124,24 @@ function splitList(s: string, seps = /[;\n]/): string[] {
     .filter(Boolean)
 }
 
-function parseSteps(s: string): { text: string; minutes?: number }[] {
+/** Un paso puede terminar en "(10 min)" y/o "[video: enlace de YouTube]", en cualquier orden. */
+function parseSteps(s: string): { text: string; minutes?: number; video?: string }[] {
   const parts = s.includes('|') ? s.split('|') : s.split(/\n+/)
   return parts
     .map((p) => p.trim().replace(/^\d+\s*[.)-]\s*/, ''))
     .filter(Boolean)
-    .map((text) => {
-      const m = text.match(/\((\d+)\s*min\.?\)\s*$/i)
-      return m ? { text: text.slice(0, m.index).trim(), minutes: Number(m[1]) } : { text }
+    .map((raw) => {
+      let text = raw
+      let video: string | undefined
+      text = text.replace(/\[\s*video\s*:\s*([^\]]+)\]/i, (_, url: string) => {
+        video = url.trim()
+        return ''
+      })
+      const m = text.match(/\((\d+)\s*min\.?\)/i)
+      const minutes = m ? Number(m[1]) : undefined
+      if (m) text = text.replace(m[0], '')
+      text = text.replace(/\s+/g, ' ').trim()
+      return { text, ...(minutes && { minutes }), ...(video && { video }) }
     })
 }
 
@@ -360,7 +370,9 @@ export function recipeToRow(r: Recipe, byId: Map<string, Ingredient>): Row {
     porciones: String(r.servings),
     dificultad: String(r.difficulty),
     ingredientes: r.ingredients.map((ri) => ingredientToText(ri, byId)).join('; '),
-    pasos: r.steps.map((s, i) => `${i + 1}. ${s.text}${s.minutes ? ` (${s.minutes} min)` : ''}`).join('\n'),
+    pasos: r.steps
+      .map((s, i) => `${i + 1}. ${s.text}${s.minutes ? ` (${s.minutes} min)` : ''}${s.video ? ` [video: ${s.video}]` : ''}`)
+      .join('\n'),
     etiquetas: r.tags.join(', '),
     foto: r.photo ?? '',
   }

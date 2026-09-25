@@ -55,10 +55,7 @@ img {
   white-space: nowrap;
 }
 @media (prefers-reduced-motion: reduce) {
-  *,
-  ::view-transition-group(*),
-  ::view-transition-old(*),
-  ::view-transition-new(*) {
+  * {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }

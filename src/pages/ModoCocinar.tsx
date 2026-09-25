@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Check, Timer as TimerIcon } from 'lucide-react'
 import { useRecetario } from '../data/store'
+import { embedUrl, parseYouTube } from '../lib/youtube'
 import { usePersonal } from '../data/personal'
 
 type WakeLockSentinelLike = { release: () => Promise<void> }
@@ -48,6 +49,41 @@ function Timer({ minutes }: { minutes: number }) {
       <button className="link" onClick={() => setLeft(null)}>
         {left === 0 ? 'Cerrar' : 'Cancelar'}
       </button>
+    </div>
+  )
+}
+
+function useOnline(): boolean {
+  const [online, setOnline] = useState(() => navigator.onLine)
+  useEffect(() => {
+    const on = () => setOnline(true)
+    const off = () => setOnline(false)
+    window.addEventListener('online', on)
+    window.addEventListener('offline', off)
+    return () => {
+      window.removeEventListener('online', on)
+      window.removeEventListener('offline', off)
+    }
+  }, [])
+  return online
+}
+
+/** Video del paso (YouTube). Los Shorts se muestran verticales. */
+function StepVideo({ url, title }: { url: string; title: string }) {
+  const online = useOnline()
+  const video = parseYouTube(url)
+  if (!video) return null
+  if (!online) return <p className="cook__video-off">El video necesita conexión a internet.</p>
+  return (
+    <div className={`cook__video${video.vertical ? ' cook__video--vertical' : ''}`}>
+      <iframe
+        src={embedUrl(video.id)}
+        title={title}
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      />
     </div>
   )
 }
@@ -103,6 +139,7 @@ export function ModoCocinar() {
         </span>
         <p>{step.text}</p>
         {step.minutes && <Timer key={i} minutes={step.minutes} />}
+        {step.video && <StepVideo url={step.video} title={`${recipe.name}, paso ${i + 1}`} />}
       </main>
       <footer className="cook__nav">
         <button className="btn" disabled={i === 0} onClick={() => setI(i - 1)}>

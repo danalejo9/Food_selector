@@ -60,7 +60,7 @@ export function RecetaDetalle() {
       </button>
 
       <div className="detail__top">
-        <div className="detail__img" style={{ viewTransitionName: `r-${recipe.id}` }}>
+        <div className="detail__img">
           <RecipeImage recipe={recipe} />
         </div>
         <header className="detail__head">

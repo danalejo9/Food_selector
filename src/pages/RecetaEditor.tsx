@@ -8,6 +8,28 @@ import { PhotoInput } from '../components/PhotoInput'
 import { normalizeName, uniqueId } from '../lib/normalize'
 import { formatQty, parseQty } from '../lib/units'
 import { IngredientDialog } from './IngredientesAdmin'
+import { parseYouTube, thumbnailUrl } from '../lib/youtube'
+
+/** Enlace de YouTube del paso, con miniatura cuando es válido. */
+function StepVideoField({ value, onChange, n }: { value: string; onChange: (v: string) => void; n: number }) {
+  const video = parseYouTube(value)
+  const bad = value.trim() !== '' && !video
+  return (
+    <div className="step-video">
+      <input
+        className={`input${bad ? ' is-unknown' : ''}`}
+        type="url"
+        inputMode="url"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="Video: enlace de YouTube (opcional)"
+        aria-label={`Video del paso ${n}`}
+      />
+      {video && <img className="step-video__thumb" src={thumbnailUrl(video.id)} alt="" />}
+      {bad && <span className="small">No parece un enlace de YouTube.</span>}
+    </div>
+  )
+}
 
 const UNITS = ['taza', 'cda', 'cdta', 'g', 'kg', 'ml', 'l', 'diente', 'tallo', 'manojo', 'tajada', 'lata', 'pizca', 'astilla', 'pastilla']
 
@@ -24,6 +46,7 @@ interface StepRow {
   key: string
   text: string
   minutes: string
+  video: string
 }
 
 const k = () => Math.random().toString(36).slice(2, 9)
@@ -56,7 +79,9 @@ export function RecetaEditor() {
     })) ?? [{ key: k(), text: '', ingredientId: '', qty: '', unit: '', note: '', optional: false }],
   )
   const [steps, setSteps] = useState<StepRow[]>(
-    existing?.steps.map((s) => ({ key: k(), text: s.text, minutes: s.minutes ? String(s.minutes) : '' })) ?? [{ key: k(), text: '', minutes: '' }],
+    existing?.steps.map((s) => ({ key: k(), text: s.text, minutes: s.minutes ? String(s.minutes) : '', video: s.video ?? '' })) ?? [
+      { key: k(), text: '', minutes: '', video: '' },
+    ],
   )
   const [errors, setErrors] = useState<string[]>([])
   const [creating, setCreating] = useState<{ rowKey: string; name: string } | null>(null)
@@ -96,6 +121,9 @@ export function RecetaEditor() {
       if (!r.ingredientId) errs.push(`“${r.text}” no está en el catálogo: créalo con el botón “crear”.`)
       if (r.qty.trim() && parseQty(r.qty) === undefined) errs.push(`La cantidad “${r.qty}” de ${r.text} no es un número.`)
     })
+    steps.forEach((s, n) => {
+      if (s.video.trim() && !parseYouTube(s.video)) errs.push(`El video del paso ${n + 1} no es un enlace de YouTube.`)
+    })
     const ids = cleanIngs.map((r) => r.ingredientId)
     if (new Set(ids).size !== ids.length) errs.push('Hay un ingrediente repetido.')
     if (!meals.length) errs.push('Elige al menos un momento del día.')
@@ -118,7 +146,11 @@ export function RecetaEditor() {
       })),
       steps: steps
         .filter((s) => s.text.trim())
-        .map((s) => ({ text: s.text.trim(), ...(Number(s.minutes) > 0 && { minutes: Number(s.minutes) }) })),
+        .map((s) => ({
+          text: s.text.trim(),
+          ...(Number(s.minutes) > 0 && { minutes: Number(s.minutes) }),
+          ...(s.video.trim() && { video: s.video.trim() }),
+        })),
       tags: tags
         .split(',')
         .map((t) => t.trim())
@@ -327,6 +359,7 @@ export function RecetaEditor() {
                 />
                 <span className="small muted">min</span>
               </label>
+              <StepVideoField value={s.video} onChange={(video) => setSteps((xs) => xs.map((x) => (x.key === s.key ? { ...x, video } : x)))} n={i + 1} />
               <span className="row-tools">
                 <button type="button" onClick={() => setSteps((xs) => move(xs, i, -1))} aria-label="Subir">
                   <ChevronUp size={16} />
@@ -341,7 +374,7 @@ export function RecetaEditor() {
             </li>
           ))}
         </ol>
-        <button type="button" className="btn" onClick={() => setSteps((xs) => [...xs, { key: k(), text: '', minutes: '' }])}>
+        <button type="button" className="btn" onClick={() => setSteps((xs) => [...xs, { key: k(), text: '', minutes: '', video: '' }])}>
           <Plus size={16} aria-hidden="true" /> Paso
         </button>
       </section>

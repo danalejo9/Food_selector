@@ -5,7 +5,6 @@ import { RecipeCard } from '../components/RecipeCard'
 import { useRecetario } from '../data/store'
 import { usePersonal } from '../data/personal'
 import { findRecipes, NO_FILTERS, type Filters, type MatchResult } from '../lib/match'
-import { withTransition } from '../lib/transition'
 import { useToast } from '../lib/useToast'
 import { MEAL_LABEL, MEALS, type Meal } from '../schema'
 
@@ -45,8 +44,8 @@ export function Cocina() {
     }
   }, [sheetOpen])
 
-  const toggle = (id: string) => withTransition(() => toggleFridge(id))
-  const setF = (patch: Partial<Filters>) => withTransition(() => setFilters((f) => ({ ...f, ...patch })))
+  const toggle = toggleFridge
+  const setF = (patch: Partial<Filters>) => setFilters((f) => ({ ...f, ...patch }))
 
   const addMissing = (r: MatchResult) => {
     const n = addShopping(r.missing.map((m) => ({ ingredientId: m.id, text: m.name, forRecipe: r.recipe.name })))

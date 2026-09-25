@@ -61,6 +61,18 @@ Para editar desde la página publicada (por ejemplo, en el celular):
 
 Esto oculta la edición a los visitantes; la protección real es que solo tú puedes subir cambios al repo.
 
+### Videos por paso (modo cocinar)
+
+Cada paso puede tener un video corto de YouTube que aparece debajo del texto en el modo cocinar.
+
+1. En la app de YouTube: **Crear → Subir video**, visibilidad **No listado** (o súbelo como Short).
+2. **Compartir → Copiar enlace**. Sirven `youtu.be/…`, `youtube.com/watch?v=…` y `youtube.com/shorts/…`.
+3. En La Nevera (modo editor): Recetario → la receta → en el paso, pega el enlace en
+   *Video* → **Guardar receta**. Luego descarga el recetario y reemplaza `data/recetario.json`.
+   En la plantilla de Excel se escribe al final del paso: `Batir los huevos (2 min) [video: https://youtu.be/…]`.
+
+Los Shorts se ven en vertical. Los videos necesitan internet (el resto de la app funciona sin conexión).
+
 ### Carga masiva
 
 Recetario → **Carga masiva** → *Descargar plantilla .xlsx*. Una fila por receta:
