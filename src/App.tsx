@@ -46,7 +46,11 @@ function Shell() {
   const { pathname } = useLocation()
   const { canEdit } = useEditor()
   const cooking = pathname.endsWith('/cocinar')
-  useEffect(() => window.scrollTo(0, 0), [pathname])
+  // con llaves: el efecto no debe devolver nada. Algunas extensiones cambian
+  // window.scrollTo para que devuelva un valor y React lo trataría como limpieza.
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
 
   if (cooking)
     return (
